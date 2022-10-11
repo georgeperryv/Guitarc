@@ -9,6 +9,7 @@ async function addCategory (req, res) {
     // const collection = await Collection.create(req.body)
     const category = new Category(req.body)
     await category.save()
+    console.log('this is category', category)
     return res.json(category)
   } catch (error) {
     console.log('error')

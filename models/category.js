@@ -3,8 +3,7 @@ const Schema = mongoose.Schema
 
 const categorySchema = new Schema(
   {
-    name: { type: String, required: true },
-    sortOrder: Number
+    category: { type: String, required: true }
   },
   {
     timestamps: true

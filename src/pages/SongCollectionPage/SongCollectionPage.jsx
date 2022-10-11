@@ -25,8 +25,8 @@ export default function SongCollectionPage ({ user, setUser }) {
   })
 
   return (
-    <div className='SongCollectionPage'>
-      <aside>
+    <div>
+      <aside className='SongCollectionPage'>
         <h1>working</h1>
         <CategoryList />
         <AddCategoryForm />

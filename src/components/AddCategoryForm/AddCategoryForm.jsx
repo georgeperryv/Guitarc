@@ -9,7 +9,6 @@ export default function AddCategoryForm ({}) {
   })
 
   function handleChange (evt) {
-    console.log(evt)
     setCategory({ ...category, [evt.target.name]: evt.target.value })
   }
 
@@ -20,7 +19,6 @@ export default function AddCategoryForm ({}) {
       // The promise returned by the signUp service method
       // will resolve to the user object included in the
       // payload of the JSON Web Token (JWT)
-      console.log('this is category', category)
       const newCollection = await categoriesAPI.addCategory(category)
       // setUser(user)
       alert(newCollection.category)
