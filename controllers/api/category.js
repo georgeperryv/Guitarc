@@ -15,6 +15,17 @@ async function addCategory (req, res) {
   }
 }
 
+async function index (req, res) {
+  const items = await Category.find({})
+    .sort('category')
+    .populate('category')
+    .exec()
+  // re-sort based upon the sortOrder of the categories
+  items.sort((a, b) => a.category.sortOrder - b.category.sortOrder)
+  res.json(items)
+}
+
 module.exports = {
-  addCategory
+  addCategory,
+  index
 }

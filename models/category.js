@@ -1,13 +1,10 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema
 
 const categorySchema = new Schema(
   {
-    category: {
-      type: String,
-      required: true
-    }
+    name: { type: String, required: true },
+    sortOrder: Number
   },
   {
     timestamps: true

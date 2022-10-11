@@ -3,7 +3,7 @@ import { useState } from 'react'
 // Import the following components
 import AuthPage from '../AuthPage/AuthPage'
 import ChordLibraryPage from '../ChordLibraryPage/ChordLibraryPage'
-import SongCollectionPage from '../App/SongCollectionPage/SongCollectionPage'
+import SongCollectionPage from '../SongCollectionPage/SongCollectionPage'
 import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage'
 import { Routes, Route } from 'react-router-dom'
 import NavBar from '../../components/NavBar/NavBar'

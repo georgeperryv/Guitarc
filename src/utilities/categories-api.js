@@ -2,10 +2,14 @@
 import { getToken } from './users-service'
 import sendRequest from './send-request'
 
-const BASE_URL = '/api/collections'
+const BASE_URL = '/api/categories'
 
-export function addCollection (category) {
+export function addCategory (category) {
   console.log('inside add collection in collections api')
   // Just send itemId for best security (no pricing)
   return sendRequest(`${BASE_URL}/add-category`, 'POST', category)
+}
+
+export function getAll () {
+  return sendRequest(BASE_URL)
 }
