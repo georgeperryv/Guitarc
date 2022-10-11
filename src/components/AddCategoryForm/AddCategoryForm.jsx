@@ -3,10 +3,10 @@ import * as SongCollectionPage from '../../pages/SongCollectionPage/SongCollecti
 import CategoryList from '../../components/CategoryList/CategoryList'
 import * as categoriesAPI from '../../utilities/categories-api'
 
-export default function AddCategoryForm ({}) {
-  const [category, setCategory] = useState({
-    category: ''
-  })
+export default function AddCategoryForm ({ category, setCategory }) {
+  //   const [category, setCategory] = useState({
+  //     category: ''
+  //   })
 
   function handleChange (evt) {
     setCategory({ ...category, [evt.target.name]: evt.target.value })

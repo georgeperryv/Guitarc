@@ -5,12 +5,17 @@ import AddCategoryForm from '../../components/AddCategoryForm/AddCategoryForm'
 
 export default function SongCollectionPage ({ user, setUser }) {
   const [activeCat, setActiveCat] = useState('')
-  const [categoryList, setCategoryList] = useState([])
   const categoriesRef = useRef([])
+  const [categoryList, setCategoryList] = useState([])
+  const [categoriesArray, setCategoriesArray] = useState([])
+  const [category, setCategory] = useState({
+    category: ''
+  })
 
   useEffect(function () {
     async function getItems () {
       const items = await categoriesAPI.getAll()
+      console.log('this is items', items)
       categoriesRef.current = items.reduce((cats, item) => {
         const cat = item.category
         console.log(cat)
@@ -22,6 +27,7 @@ export default function SongCollectionPage ({ user, setUser }) {
     }
     // setCategoryList(items)
 
+    // setActiveCat(categoriesRef.current[0])
     getItems()
   }, [])
 
@@ -34,7 +40,7 @@ export default function SongCollectionPage ({ user, setUser }) {
           activeCat={activeCat}
           setActiveCat={setActiveCat}
         />
-        <AddCategoryForm />
+        <AddCategoryForm category={category} setCategory={setCategory} />
       </aside>
     </div>
   )

@@ -36,7 +36,7 @@ export default function CategoryList ({ categories, activeCat, setActiveCat }) {
   //   ))
   //   return <ul className='CategoryList'>{cats}</ul>
   // }
-
+  console.log('categories inside categorylist', categories)
   const cats = categories.map(cat => (
     <li
       key={cat}
