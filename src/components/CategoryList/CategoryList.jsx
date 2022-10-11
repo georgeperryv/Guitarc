@@ -36,5 +36,17 @@ export default function CategoryList ({ categories, activeCat, setActiveCat }) {
   //   ))
   //   return <ul className='CategoryList'>{cats}</ul>
   // }
-  return <h1>inside category list</h1>
+
+  const cats = categories.map(cat => (
+    <li
+      key={cat}
+      className={cat === activeCat ? 'active' : ''}
+      // FYI, the below will also work, but will give a warning
+      // className={cat === activeCat && 'active'}
+      onClick={() => setActiveCat(cat)}
+    >
+      {cat}
+    </li>
+  ))
+  return <ul className='CategoryList'>{cats}</ul>
 }
