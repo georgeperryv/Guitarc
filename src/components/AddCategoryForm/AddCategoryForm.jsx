@@ -1,12 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import * as SongCollectionPage from '../../pages/SongCollectionPage/SongCollectionPage'
 import CategoryList from '../../components/CategoryList/CategoryList'
 import * as categoriesAPI from '../../utilities/categories-api'
 
-export default function AddCategoryForm ({ category, setCategory }) {
+const AddCategoryForm = ({ category, setCategory, setCategoriesList }) => {
   //   const [category, setCategory] = useState({
   //     category: ''
   //   })
+  function fetchAPI () {
+    async function getItems () {
+      const items = await categoriesAPI.getAll()
+      setCategoriesList([1])
+      console.log('this is items from AddCategoryForm', items)
+    }
+    getItems()
+  }
 
   function handleChange (evt) {
     setCategory({ ...category, [evt.target.name]: evt.target.value })
@@ -20,8 +28,16 @@ export default function AddCategoryForm ({ category, setCategory }) {
       // will resolve to the user object included in the
       // payload of the JSON Web Token (JWT)
       const newCollection = await categoriesAPI.addCategory(category)
+      fetchAPI()
+
       // setUser(user)
-      alert(newCollection.category)
+
+      //   useEffect(function () {
+      //     async function getItems () {
+      //       const items = await categoriesAPI.getAll()
+      //       console.log('items:', items)
+      //     }
+      //   }, [])
     } catch {
       console.log('Log In Failed - Try Again')
     }
@@ -41,3 +57,5 @@ export default function AddCategoryForm ({ category, setCategory }) {
     </form>
   )
 }
+
+export default AddCategoryForm
