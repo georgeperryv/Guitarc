@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 
 const songSchema = new Schema(
   {
-    name: { type: String, required: true },
+    song: { type: String, required: true },
     category: { type: Schema.Types.ObjectId, ref: 'Category' }
   },
   {
@@ -13,4 +13,4 @@ const songSchema = new Schema(
   }
 )
 
-module.exports = songSchema
+module.exports = mongoose.model('Song', songSchema)

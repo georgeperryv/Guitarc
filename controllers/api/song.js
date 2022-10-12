@@ -1,8 +1,9 @@
-const Category = require('../../models/song')
+const Song = require('../../models/song')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 async function addSong (req, res) {
+  console.log(req.body)
   try {
     // const collection = await Collection.create(req.body)
     const song = new Song(req.body)
