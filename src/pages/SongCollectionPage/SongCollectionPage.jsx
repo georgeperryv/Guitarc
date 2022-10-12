@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import CategoryList from '../../components/CategoryList/CategoryList'
 import * as categoriesAPI from '../../utilities/categories-api'
 import AddCategoryForm from '../../components/AddCategoryForm/AddCategoryForm'
+import SongList from '../../components/SongList/SongList'
+import AddSongForm from '../../components/AddSongForm/AddSongForm'
 
 export default function SongCollectionPage ({ user, setUser }) {
   const [activeCat, setActiveCat] = useState('')
@@ -11,12 +13,16 @@ export default function SongCollectionPage ({ user, setUser }) {
   const [category, setCategory] = useState({
     category: ''
   })
+  const [song, setSong] = useState({
+    song: ''
+  })
 
   useEffect(
     function () {
       async function getItems () {
         const items = await categoriesAPI.getAll()
-        console.log('this is items', items)
+        // const songs = await songsAPI.getAll()
+        // console.log('this is items', items)
         setCategoriesArray(
           items.reduce((cats, item) => {
             const cat = item.category
@@ -51,6 +57,7 @@ export default function SongCollectionPage ({ user, setUser }) {
           setCategoriesList={setCategoriesList}
         />
       </aside>
+      <AddSongForm song={song} setSong={setSong} />
     </div>
   )
 }

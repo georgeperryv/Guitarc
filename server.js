@@ -27,7 +27,7 @@ app.use(require('./config/checkToken'))
 app.use('/api/users', require('./routes/api/users'))
 const ensureLoggedIn = require('./config/ensureLoggedIn')
 app.use('/api/categories', ensureLoggedIn, require('./routes/api/category'))
-
+app.use('/api/songs', ensureLoggedIn, require('./routes/api/songs'))
 // Put API routes here, before the "catch all" route
 
 // The following "catch all" route (note the *) is necessary
