@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 async function addSong (req, res) {
-  console.log(req.body)
+  console.log('This is req', req)
+
   try {
     // const collection = await Collection.create(req.body)
     const song = new Song(req.body)

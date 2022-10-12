@@ -57,7 +57,7 @@ export default function SongCollectionPage ({ user, setUser }) {
           setCategoriesList={setCategoriesList}
         />
       </aside>
-      <AddSongForm song={song} setSong={setSong} />
+      <AddSongForm song={song} setSong={setSong} activeCat={activeCat} />
     </div>
   )
 }

@@ -3,13 +3,12 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 async function addCategory (req, res) {
+  console.log('this is req', req)
   try {
-   
- 
     // const collection = await Collection.create(req.body)
     const category = new Category(req.body)
     await category.save()
-  
+
     return res.json(category)
   } catch (error) {
     console.log('error')
