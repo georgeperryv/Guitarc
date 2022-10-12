@@ -1,6 +1,12 @@
 import './CategoryList.css'
 
-export default function CategoryList ({ categories, activeCat, setActiveCat }) {
+export default function CategoryList ({
+  categories,
+  activeCat,
+  setActiveCat,
+  makeUniqueCatMessage,
+  setMakeUniqueCatMessage
+}) {
   // const cats = categories.map(cat => <li> hello </li>)
 
   // return <ul>{cats}</ul>
@@ -43,7 +49,10 @@ export default function CategoryList ({ categories, activeCat, setActiveCat }) {
       className={cat === activeCat ? 'active' : ''}
       // FYI, the below will also work, but will give a warning
       // className={cat === activeCat && 'active'}
-      onClick={() => setActiveCat(cat)}
+      onClick={() => {
+        setActiveCat(cat)
+        setMakeUniqueCatMessage('')
+      }}
     >
       {cat}
     </li>

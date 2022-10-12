@@ -3,7 +3,13 @@ import * as SongCollectionPage from '../../pages/SongCollectionPage/SongCollecti
 import CategoryList from '../../components/CategoryList/CategoryList'
 import * as categoriesAPI from '../../utilities/categories-api'
 
-const AddCategoryForm = ({ category, setCategory, setCategoriesRefresh }) => {
+const AddCategoryForm = ({
+  category,
+  setCategory,
+  setCategoriesRefresh,
+  makeUniqueCatMessage,
+  setMakeUniqueCatMessage
+}) => {
   function handleChange (evt) {
     setCategory({ ...category, [evt.target.name]: evt.target.value })
   }
@@ -16,6 +22,11 @@ const AddCategoryForm = ({ category, setCategory, setCategoriesRefresh }) => {
       // will resolve to the user object included in the
       // payload of the JSON Web Token (JWT)
       const newCollection = await categoriesAPI.addCategory(category)
+      if (typeof newCollection === 'string') {
+        setMakeUniqueCatMessage(newCollection)
+      } else {
+        setMakeUniqueCatMessage('')
+      }
       setCategoriesRefresh([1])
       category.category = ''
       // fetchAPI()
@@ -43,6 +54,7 @@ const AddCategoryForm = ({ category, setCategory, setCategoriesRefresh }) => {
         onChange={handleChange}
         required
       />
+      <h1>{makeUniqueCatMessage}</h1>
       <button type='submit'>Submit</button>
     </form>
   )

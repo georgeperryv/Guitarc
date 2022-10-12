@@ -31,6 +31,8 @@ export default function SongCollectionPage ({ user, setUser }) {
 
   const [songRefresh, setSongRefresh] = useState([])
 
+  const [makeUniqueCatMessage, setMakeUniqueCatMessage] = useState('')
+
   const [song, setSong] = useState({
     song: ''
   })
@@ -80,11 +82,15 @@ export default function SongCollectionPage ({ user, setUser }) {
           categories={categoriesArray}
           activeCat={activeCat}
           setActiveCat={setActiveCat}
+          makeUniqueCatMessage={makeUniqueCatMessage}
+          setMakeUniqueCatMessage={setMakeUniqueCatMessage}
         />
         <AddCategoryForm
           category={category}
           setCategory={setCategory}
           setCategoriesRefresh={setCategoriesRefresh}
+          makeUniqueCatMessage={makeUniqueCatMessage}
+          setMakeUniqueCatMessage={setMakeUniqueCatMessage}
         />
       </aside>
       {activeCat ? (

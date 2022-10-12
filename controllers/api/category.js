@@ -3,13 +3,17 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 async function addCategory (req, res) {
-  console.log('this is req', req)
+  console.log('req.body', req.body)
   try {
-    // const collection = await Collection.create(req.body)
-    const category = new Category(req.body)
-    await category.save()
+    if (await Category.exists({ category: req.body.category })) {
+      console.log('not new try again')
+      return res.json('Please enter a unique category')
+    } else {
+      const category = new Category(req.body)
+      await category.save()
 
-    return res.json(category)
+      return res.json(category)
+    }
   } catch (error) {
     console.log('error')
   }
