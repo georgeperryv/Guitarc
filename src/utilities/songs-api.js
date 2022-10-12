@@ -13,3 +13,7 @@ export function addSong (songObject) {
 export function getAll () {
   return sendRequest(BASE_URL)
 }
+
+export function getSongsFromCategory (activeCat) {
+  return sendRequest(`${BASE_URL}/songs-from-category/${activeCat}`)
+}

@@ -22,6 +22,20 @@ async function addSong (req, res) {
   }
 }
 
+async function getSongsFromCategory (req, res) {
+  console.log('req.params.category', req.params.category)
+  const categoryId = await Category.findOne({ category: req.params.category })
+  const songs = await Song.find({ category: categoryId.id })
+    .sort('song')
+    .populate('song')
+    .exec()
+  // re-sort based upon the sortOrder of the categories
+  songs.sort((a, b) => a.song.sortOrder - b.song.sortOrder)
+  console.log('songs', songs)
+  res.json(songs)
+}
+
 module.exports = {
-  addSong
+  addSong,
+  getSongsFromCategory
 }

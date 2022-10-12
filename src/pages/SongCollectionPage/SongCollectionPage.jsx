@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import CategoryList from '../../components/CategoryList/CategoryList'
 import * as categoriesAPI from '../../utilities/categories-api'
+import * as songsAPI from '../../utilities/songs-api'
 import AddCategoryForm from '../../components/AddCategoryForm/AddCategoryForm'
 import SongList from '../../components/SongList/SongList'
 import AddSongForm from '../../components/AddSongForm/AddSongForm'
@@ -22,13 +23,19 @@ export default function SongCollectionPage ({ user, setUser }) {
     category: ''
   })
 
+  //Passed down to the songs list, this is an array of all of the current songs from the API
+  const [songsArray, setSongsArray] = useState([])
+
+  const [songRefresh, setSongRefresh] = useState([])
+
   const [song, setSong] = useState({
     song: ''
   })
 
+  //useEffect for getting Categories into an array called Categories Array and updating based on categoriesRefresh
   useEffect(
     function () {
-      async function getItems () {
+      async function getCategories () {
         const categories = await categoriesAPI.getAll()
         setCategoriesArray(
           categories.reduce((cats, item) => {
@@ -38,9 +45,28 @@ export default function SongCollectionPage ({ user, setUser }) {
         )
       }
 
-      getItems()
+      getCategories()
     },
     [categoriesRefresh]
+  )
+
+  //useEffect for getting Songs into an array called Songs Array and updating based on songsRefresh
+  useEffect(
+    function () {
+      async function getSongs () {
+        const songs = await songsAPI.getSongsFromCategory(activeCat)
+        console.log('were back with songs', songs)
+        setSongsArray(
+          songs.reduce((songs, item) => {
+            const song = item.category
+            return songs.includes(song) ? songs : [...songs, song]
+          }, [])
+        )
+      }
+
+      getSongs()
+    },
+    [activeCat, songRefresh]
   )
 
   return (
