@@ -1,4 +1,9 @@
-export default function SongList ({ songs, activeSong, setActiveSong }) {
+export default function SongList ({
+  songs,
+  activeSong,
+  setActiveSong,
+  setMakeUniqueSongMessage
+}) {
   console.log('this is the songs array sent', songs)
   const songList = songs.map(s => (
     <li
@@ -6,7 +11,10 @@ export default function SongList ({ songs, activeSong, setActiveSong }) {
       className={s === activeSong ? 'active' : ''}
       // FYI, the below will also work, but will give a warning
       // className={cat === activeCat && 'active'}
-      onClick={() => setActiveSong(s)}
+      onClick={() => {
+        setActiveSong(s)
+        setMakeUniqueSongMessage('')
+      }}
     >
       {s}
     </li>

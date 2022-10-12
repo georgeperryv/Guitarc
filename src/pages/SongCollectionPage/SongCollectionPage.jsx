@@ -18,6 +18,9 @@ export default function SongCollectionPage ({ user, setUser }) {
   //and put that in the dependency array on this page so useEffect will refresh
   const [categoriesRefresh, setCategoriesRefresh] = useState([])
 
+  //Message prompt to enter a unique category if the user tries to repeat a category
+  const [makeUniqueCatMessage, setMakeUniqueCatMessage] = useState('')
+
   //Passed down to the category form to create a new category
   const [category, setCategory] = useState({
     category: ''
@@ -31,7 +34,8 @@ export default function SongCollectionPage ({ user, setUser }) {
 
   const [songRefresh, setSongRefresh] = useState([])
 
-  const [makeUniqueCatMessage, setMakeUniqueCatMessage] = useState('')
+  //Message prompt to enter a unique song if the user tries to repeat a song
+  const [makeUniqueSongMessage, setMakeUniqueSongMessage] = useState('')
 
   const [song, setSong] = useState({
     song: ''
@@ -84,6 +88,7 @@ export default function SongCollectionPage ({ user, setUser }) {
           setActiveCat={setActiveCat}
           makeUniqueCatMessage={makeUniqueCatMessage}
           setMakeUniqueCatMessage={setMakeUniqueCatMessage}
+          setMakeUniqueSongMessage={setMakeUniqueSongMessage}
         />
         <AddCategoryForm
           category={category}
@@ -99,13 +104,17 @@ export default function SongCollectionPage ({ user, setUser }) {
             songs={songsArray}
             activeSong={activeSong}
             setActiveSong={setActiveSong}
+            makeUniqueSongMessage={makeUniqueSongMessage}
+            setMakeUniqueSongMessage={setMakeUniqueSongMessage}
           />
           <AddSongForm
             song={song}
             setSong={setSong}
             activeCat={activeCat}
             setSongRefresh={setSongRefresh}
-          />{' '}
+            makeUniqueSongMessage={makeUniqueSongMessage}
+            setMakeUniqueSongMessage={setMakeUniqueSongMessage}
+          />
         </>
       ) : (
         <h1>nothing</h1>

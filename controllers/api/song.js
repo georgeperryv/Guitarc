@@ -5,18 +5,18 @@ const bcrypt = require('bcrypt')
 
 async function addSong (req, res) {
   try {
-    // const collection = await Collection.create(req.body)
-    // console.log(
-    //   'finding all in category',
-    //   await Category.findOne({ category: req.body.activeCat })
-    // )
-    const song = new Song({
-      song: req.body.song,
-      category: await Category.findOne({ category: req.body.activeCat })
-    })
-    await song.save()
+    if (await Song.exists({ song: req.body.song })) {
+      console.log('not new try again')
+      return res.json('Please enter a unique song')
+    } else {
+      const song = new Song({
+        song: req.body.song,
+        category: await Category.findOne({ category: req.body.activeCat })
+      })
+      await song.save()
 
-    return res.json(song)
+      return res.json(song)
+    }
   } catch (error) {
     console.log('error')
   }

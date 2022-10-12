@@ -4,7 +4,14 @@ import CategoryList from '../../components/CategoryList/CategoryList'
 import * as categoriesAPI from '../../utilities/categories-api'
 import * as songsAPI from '../../utilities/songs-api'
 
-const AddSongForm = ({ song, setSong, activeCat, setSongRefresh }) => {
+const AddSongForm = ({
+  song,
+  setSong,
+  activeCat,
+  setSongRefresh,
+  makeUniqueSongMessage,
+  setMakeUniqueSongMessage
+}) => {
   function handleChange (evt) {
     setSong({ ...song, [evt.target.name]: evt.target.value })
   }
@@ -21,6 +28,11 @@ const AddSongForm = ({ song, setSong, activeCat, setSongRefresh }) => {
       // will resolve to the user object included in the
       // payload of the JSON Web Token (JWT)
       const newCollection = await songsAPI.addSong(songObject)
+      if (typeof newCollection === 'string') {
+        setMakeUniqueSongMessage(newCollection)
+      } else {
+        setMakeUniqueSongMessage('')
+      }
       setSongRefresh([1])
       song.song = ''
       //   fetchAPI()
@@ -48,6 +60,7 @@ const AddSongForm = ({ song, setSong, activeCat, setSongRefresh }) => {
         onChange={handleChange}
         required
       />
+      <h1>{makeUniqueSongMessage}</h1>
       <button type='submit'>Submit</button>
     </form>
   )

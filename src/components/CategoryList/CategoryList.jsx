@@ -4,8 +4,8 @@ export default function CategoryList ({
   categories,
   activeCat,
   setActiveCat,
-  makeUniqueCatMessage,
-  setMakeUniqueCatMessage
+  setMakeUniqueCatMessage,
+  setMakeUniqueSongMessage
 }) {
   // const cats = categories.map(cat => <li> hello </li>)
 
@@ -52,6 +52,7 @@ export default function CategoryList ({
       onClick={() => {
         setActiveCat(cat)
         setMakeUniqueCatMessage('')
+        setMakeUniqueSongMessage('')
       }}
     >
       {cat}
