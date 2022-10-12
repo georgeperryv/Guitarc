@@ -4,18 +4,6 @@ import CategoryList from '../../components/CategoryList/CategoryList'
 import * as categoriesAPI from '../../utilities/categories-api'
 
 const AddCategoryForm = ({ category, setCategory, setCategoriesRefresh }) => {
-  //   const [category, setCategory] = useState({
-  //     category: ''
-  //   })
-  // function fetchAPI () {
-  //   async function getItems () {
-  //     const items = await categoriesAPI.getAll()
-  //     setCategoriesList([1])
-  //     console.log('this is items from AddCategoryForm', items)
-  //   }
-  //   getItems()
-  // }
-
   function handleChange (evt) {
     setCategory({ ...category, [evt.target.name]: evt.target.value })
   }
@@ -28,8 +16,8 @@ const AddCategoryForm = ({ category, setCategory, setCategoriesRefresh }) => {
       // will resolve to the user object included in the
       // payload of the JSON Web Token (JWT)
       const newCollection = await categoriesAPI.addCategory(category)
-      console.log('making it here')
       setCategoriesRefresh([1])
+      category.category = ''
       // fetchAPI()
 
       // setUser(user)

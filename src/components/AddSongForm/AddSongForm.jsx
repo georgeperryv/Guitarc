@@ -5,8 +5,6 @@ import * as categoriesAPI from '../../utilities/categories-api'
 import * as songsAPI from '../../utilities/songs-api'
 
 const AddSongForm = ({ song, setSong, activeCat, setSongRefresh }) => {
-  
-
   function handleChange (evt) {
     setSong({ ...song, [evt.target.name]: evt.target.value })
   }
@@ -24,6 +22,7 @@ const AddSongForm = ({ song, setSong, activeCat, setSongRefresh }) => {
       // payload of the JSON Web Token (JWT)
       const newCollection = await songsAPI.addSong(songObject)
       setSongRefresh([1])
+      song.song = ''
       //   fetchAPI()
 
       // setUser(user)
