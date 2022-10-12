@@ -4,21 +4,10 @@ import CategoryList from '../../components/CategoryList/CategoryList'
 import * as categoriesAPI from '../../utilities/categories-api'
 import * as songsAPI from '../../utilities/songs-api'
 
-const AddSongForm = ({ song, setSong, activeCat }) => {
-  //   const [category, setCategory] = useState({
-  //     category: ''
-  //   })
-  function fetchAPI () {
-    async function getSongs () {
-      const items = await songsAPI.getAll()
-      //   setCategoriesList([1])
-      console.log('this is items from AddCategoryForm', items)
-    }
-    getSongs()
-  }
+const AddSongForm = ({ song, setSong, activeCat, setSongRefresh }) => {
+  
 
   function handleChange (evt) {
-    console.log('this is song inside handleChange', song)
     setSong({ ...song, [evt.target.name]: evt.target.value })
   }
 
@@ -30,11 +19,11 @@ const AddSongForm = ({ song, setSong, activeCat }) => {
     // Prevent form from being submitted to the server
     evt.preventDefault()
     try {
-      console.log('this is active cattttt', songObject)
       // The promise returned by the signUp service method
       // will resolve to the user object included in the
       // payload of the JSON Web Token (JWT)
       const newCollection = await songsAPI.addSong(songObject)
+      setSongRefresh([1])
       //   fetchAPI()
 
       // setUser(user)

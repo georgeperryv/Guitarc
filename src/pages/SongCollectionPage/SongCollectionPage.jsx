@@ -92,7 +92,12 @@ export default function SongCollectionPage ({ user, setUser }) {
         activeSong={activeSong}
         setActiveSong={setActiveSong}
       />
-      <AddSongForm song={song} setSong={setSong} activeCat={activeCat} />
+      <AddSongForm
+        song={song}
+        setSong={setSong}
+        activeCat={activeCat}
+        setSongRefresh={setSongRefresh}
+      />
     </div>
   )
 }
