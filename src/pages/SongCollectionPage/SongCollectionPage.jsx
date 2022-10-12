@@ -23,7 +23,10 @@ export default function SongCollectionPage ({ user, setUser }) {
     category: ''
   })
 
+  //Songs
   //Passed down to the songs list, this is an array of all of the current songs from the API
+  const [activeSong, setActiveSong] = useState('')
+
   const [songsArray, setSongsArray] = useState([])
 
   const [songRefresh, setSongRefresh] = useState([])
@@ -57,9 +60,9 @@ export default function SongCollectionPage ({ user, setUser }) {
         const songs = await songsAPI.getSongsFromCategory(activeCat)
         console.log('were back with songs', songs)
         setSongsArray(
-          songs.reduce((songs, item) => {
-            const song = item.category
-            return songs.includes(song) ? songs : [...songs, song]
+          songs.reduce((s, item) => {
+            const song = item.song
+            return s.includes(song) ? s : [...s, song]
           }, [])
         )
       }
@@ -84,7 +87,11 @@ export default function SongCollectionPage ({ user, setUser }) {
           setCategoriesRefresh={setCategoriesRefresh}
         />
       </aside>
-      <SongList />
+      <SongList
+        songs={songsArray}
+        activeSong={activeSong}
+        setActiveSong={setActiveSong}
+      />
       <AddSongForm song={song} setSong={setSong} activeCat={activeCat} />
     </div>
   )
