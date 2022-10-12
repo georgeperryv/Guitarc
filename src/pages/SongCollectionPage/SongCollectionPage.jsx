@@ -6,13 +6,22 @@ import SongList from '../../components/SongList/SongList'
 import AddSongForm from '../../components/AddSongForm/AddSongForm'
 
 export default function SongCollectionPage ({ user, setUser }) {
+  //Category name of whatever is currently clicked. This is passed down to the category list
   const [activeCat, setActiveCat] = useState('')
-  const categoriesRef = useRef([])
-  const [categoriesList, setCategoriesList] = useState([])
+
+  //Also passed down to the category list, this is an array of all of the current categories from the API
   const [categoriesArray, setCategoriesArray] = useState([])
+
+  //In order for the useEffect to update and pull all of the categories when something is submitted,
+  //I pass a use state down to the form, update it arbitrarily whenever the form is submitted,
+  //and put that in the dependency array on this page so useEffect will refresh
+  const [categoriesRefresh, setCategoriesRefresh] = useState([])
+
+  //Passed down to the category form to create a new category
   const [category, setCategory] = useState({
     category: ''
   })
+
   const [song, setSong] = useState({
     song: ''
   })
@@ -20,26 +29,18 @@ export default function SongCollectionPage ({ user, setUser }) {
   useEffect(
     function () {
       async function getItems () {
-        const items = await categoriesAPI.getAll()
-        // const songs = await songsAPI.getAll()
-        // console.log('this is items', items)
+        const categories = await categoriesAPI.getAll()
         setCategoriesArray(
-          items.reduce((cats, item) => {
+          categories.reduce((cats, item) => {
             const cat = item.category
             return cats.includes(cat) ? cats : [...cats, cat]
           }, [])
         )
-        console.log('this is categoriesArray123', categoriesArray)
-        setActiveCat(categoriesRef.current[0])
-        console.log('categoriesref.current', categoriesRef.current)
-        // console.log('categories ref', categoriesRef)
       }
-      // setCategoryList(items)
 
-      // setActiveCat(categoriesRef.current[0])
       getItems()
     },
-    [categoriesList]
+    [categoriesRefresh]
   )
 
   return (
@@ -54,9 +55,10 @@ export default function SongCollectionPage ({ user, setUser }) {
         <AddCategoryForm
           category={category}
           setCategory={setCategory}
-          setCategoriesList={setCategoriesList}
+          setCategoriesRefresh={setCategoriesRefresh}
         />
       </aside>
+      <SongList />
       <AddSongForm song={song} setSong={setSong} activeCat={activeCat} />
     </div>
   )
