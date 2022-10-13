@@ -74,11 +74,44 @@ app.post('/images', upload.single('image'), async (req, res) => {
   })
   chord
     .save()
+    .then(r => {
+      res.status(200).send({
+        _id: r._id,
+        name: req.body.description,
+        chordImage: result.Key,
+        learned: false
+      })
+    })
+    .catch(err => {
+      res.send({ message: err })
+    })
+  // res.send({ imagePath: `/images/${result.Key}` })
+})
+
+app.post('/images/song-panel', upload.single('image'), async (req, res) => {
+  const file = req.file
+  console.log('file', file)
+  const result = await uploadFile(file)
+  console.log('result', result)
+  await unlinkFile(file.path)
+  const description = req.body.description
+  console.log('description', description)
+  console.log('here is req', req)
+
+  const chord = new Chord({
+    name: req.body.description,
+    song: req.body.activeSong,
+    chordImage: result.Key,
+    learned: false
+  })
+  chord
+    .save()
     .then(result => {
       res.status(200).send({
-        _id: result._id,
-        name: file.originalname,
-        chordImage: result.Key
+        _id: r._id,
+        name: req.body.description,
+        chordImage: result.Key,
+        learned: false
       })
     })
     .catch(err => {
