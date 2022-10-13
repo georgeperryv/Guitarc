@@ -1,5 +1,9 @@
 const express = require('express')
 
+const fs = require('fs')
+const util = require('util')
+const unlinkFile = util.promisify(fs.unlink)
+
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
@@ -37,24 +41,25 @@ app.use('/api/songs', ensureLoggedIn, require('./routes/api/songs'))
 app.use('/api/chords', ensureLoggedIn, require('./routes/api/chords'))
 // Put API routes here, before the "catch all" route
 
+app.get('/images/:key', (req, res) => {
+  console.log('I made it here')
+  const key = req.params.key
+  console.log('this is key', key)
+  const readStream = getFileStream(key)
+  console.log('this is readStream', readStream)
+
+  readStream.pipe(res)
+})
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 
-app.get('/images/:key', (req, res) => {
-  const key = req.params.key
-  const readStream = getFileStream(key)
-
-  readStream.pipe(res)
-})
-
 app.post('/images', upload.single('image'), async (req, res) => {
   const file = req.file
-  console.log(file)
   const result = await uploadFile(file)
-  console.log(result)
+  await unlinkFile(file.path)
   const description = req.body.description
   res.send({ imagePath: `/images/${result.Key}` })
 })

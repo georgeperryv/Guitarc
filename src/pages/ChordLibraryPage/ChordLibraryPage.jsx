@@ -22,9 +22,11 @@ export default function ChordLibraryPage () {
   const submit = async event => {
     event.preventDefault()
     const result = await postImage({ image: file, description })
-    setImages([result.image, ...images])
+    console.log('result', result)
+    await setImages([result.imagePath, ...images])
+    console.log('images array', images)
   }
-
+  console.log('images array 2', images)
   const fileSelected = event => {
     const file = event.target.files[0]
     setFile(file)
@@ -41,15 +43,12 @@ export default function ChordLibraryPage () {
         ></input>
         <button type='submit'>Submit</button>
       </form>
-
       {images.map(image => (
         <div key={image}>
           {' '}
           <img src={image}></img>
         </div>
       ))}
-
-      <img src='https://guitarchords.s3.us-west-1.amazonaws.com/4d5da0163052fa2d828f8e4a6feb24d8'></img>
     </div>
   )
 }
