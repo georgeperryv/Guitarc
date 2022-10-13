@@ -4,6 +4,8 @@ const fs = require('fs')
 const util = require('util')
 const unlinkFile = util.promisify(fs.unlink)
 
+const Chord = require('./models/chord')
+
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
@@ -58,10 +60,31 @@ app.get('/*', function (req, res) {
 
 app.post('/images', upload.single('image'), async (req, res) => {
   const file = req.file
+  console.log('file', file)
   const result = await uploadFile(file)
+  console.log('result', result)
   await unlinkFile(file.path)
   const description = req.body.description
-  res.send({ imagePath: `/images/${result.Key}` })
+  console.log('description', description)
+
+  const chord = new Chord({
+    name: req.body.description,
+
+    chordImage: result.Key
+  })
+  chord
+    .save()
+    .then(result => {
+      res.status(200).send({
+        _id: result._id,
+        name: file.originalname,
+        chordImage: result.Key
+      })
+    })
+    .catch(err => {
+      res.send({ message: err })
+    })
+  // res.send({ imagePath: `/images/${result.Key}` })
 })
 
 // Configure to use port 3001 instead of 3000 during
