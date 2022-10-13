@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-import './ChordLibraryPage.css'
+import * as ChordLibraryPage from '../../pages/ChordLibraryPage/ChordLibraryPage'
 
 async function postImage ({ image, description }) {
   const formData = new FormData()
@@ -14,7 +14,7 @@ async function postImage ({ image, description }) {
   return result.data
 }
 
-export default function ChordLibraryPage () {
+export default function ChordSubmitOnSongPanel ({}) {
   const [file, setFile] = useState()
   const [description, setDescription] = useState('')
   const [images, setImages] = useState([])
@@ -33,7 +33,7 @@ export default function ChordLibraryPage () {
   }
 
   return (
-    <div className='ChordLibraryPage'>
+    <div className='ChordSubmitOnSongPanel'>
       <form onSubmit={submit}>
         <input onChange={fileSelected} type='file' accept='image/*'></input>
         <input
@@ -49,7 +49,7 @@ export default function ChordLibraryPage () {
           <img src={image}></img>
         </div>
       ))}
-      <img src='/images/9aaf61c95eea0f6116bcaa244a27647c'></img>
+      {/* <img src='/images/e884075b4d6bf0d5f0cf262c3364f097'></img> */}
     </div>
   )
 }

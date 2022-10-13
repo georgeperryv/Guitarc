@@ -5,6 +5,8 @@ import * as songsAPI from '../../utilities/songs-api'
 import AddCategoryForm from '../../components/AddCategoryForm/AddCategoryForm'
 import SongList from '../../components/SongList/SongList'
 import AddSongForm from '../../components/AddSongForm/AddSongForm'
+import SongPanel from '../../components/SongPanel/SongPanel'
+import ChordSubmitOnSongPanel from '../../components/ChordSubmitOnSongPanel/ChordSubmitOnSongPanel'
 
 export default function SongCollectionPage ({ user, setUser }) {
   //Category name of whatever is currently clicked. This is passed down to the category list
@@ -98,23 +100,33 @@ export default function SongCollectionPage ({ user, setUser }) {
           setMakeUniqueCatMessage={setMakeUniqueCatMessage}
         />
       </aside>
-      {activeCat ? (
+      <div>
+        {activeCat ? (
+          <>
+            <SongList
+              songs={songsArray}
+              activeSong={activeSong}
+              setActiveSong={setActiveSong}
+              makeUniqueSongMessage={makeUniqueSongMessage}
+              setMakeUniqueSongMessage={setMakeUniqueSongMessage}
+            />
+            <AddSongForm
+              song={song}
+              setSong={setSong}
+              activeCat={activeCat}
+              setSongRefresh={setSongRefresh}
+              makeUniqueSongMessage={makeUniqueSongMessage}
+              setMakeUniqueSongMessage={setMakeUniqueSongMessage}
+            />
+          </>
+        ) : (
+          <h1>nothing</h1>
+        )}
+      </div>
+      {activeSong ? (
         <>
-          <SongList
-            songs={songsArray}
-            activeSong={activeSong}
-            setActiveSong={setActiveSong}
-            makeUniqueSongMessage={makeUniqueSongMessage}
-            setMakeUniqueSongMessage={setMakeUniqueSongMessage}
-          />
-          <AddSongForm
-            song={song}
-            setSong={setSong}
-            activeCat={activeCat}
-            setSongRefresh={setSongRefresh}
-            makeUniqueSongMessage={makeUniqueSongMessage}
-            setMakeUniqueSongMessage={setMakeUniqueSongMessage}
-          />
+          <SongPanel activeSong={activeSong} />
+          <ChordSubmitOnSongPanel />
         </>
       ) : (
         <h1>nothing</h1>
