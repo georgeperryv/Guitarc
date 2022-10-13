@@ -36,10 +36,10 @@ export default function ChordLibraryPage () {
         <input onChange={fileSelected} type='file' accept='image/*'></input>
         <input
           value={description}
-          onchange={e => setDescription(e.target.value)}
+          onChange={e => setDescription(e.target.value)}
           type='text'
         ></input>
-        <button type='submit'></button>
+        <button type='submit'>Submit</button>
       </form>
 
       {images.map(image => (
