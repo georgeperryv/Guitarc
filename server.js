@@ -44,6 +44,9 @@ app.get('/*', function (req, res) {
 })
 
 app.post('/images', upload.single('image'), (req, res) => {
+  const file = req.file
+  console.log(file)
+  const description = req.body.description
   res.send('Its working')
 })
 
