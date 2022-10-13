@@ -69,8 +69,8 @@ app.post('/images', upload.single('image'), async (req, res) => {
 
   const chord = new Chord({
     name: req.body.description,
-
-    chordImage: result.Key
+    chordImage: result.Key,
+    learned: false
   })
   chord
     .save()
