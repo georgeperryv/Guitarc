@@ -114,12 +114,19 @@ app.post('/images/song-panel', upload.single('image'), async (req, res) => {
         _id: r._id,
         name: req.body.description,
         chordImage: result.Key,
-        learned: false
+        learned: false,
+        imagePath: `/images/${result.Key}`
       })
     })
     .catch(err => {
       res.send({ message: err })
     })
+  const updatedSongWithChord = await Song.updateMany(
+    { song: req.body.activeSong },
+    { $set: { chord: [chord._id] } }
+  )
+  console.log('this is updatedSongWithaChord', updatedSongWithChord)
+
   // res.send({ imagePath: `/images/${result.Key}` })
 })
 
