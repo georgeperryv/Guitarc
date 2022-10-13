@@ -1,4 +1,10 @@
 const express = require('express')
+
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
+const { uploadFile } = require('./s3')
+
 const path = require('path')
 const favicon = require('serve-favicon')
 const logger = require('morgan')
@@ -28,6 +34,7 @@ app.use('/api/users', require('./routes/api/users'))
 const ensureLoggedIn = require('./config/ensureLoggedIn')
 app.use('/api/categories', ensureLoggedIn, require('./routes/api/category'))
 app.use('/api/songs', ensureLoggedIn, require('./routes/api/songs'))
+app.use('/api/chords', ensureLoggedIn, require('./routes/api/chords'))
 // Put API routes here, before the "catch all" route
 
 // The following "catch all" route (note the *) is necessary
@@ -43,3 +50,5 @@ const port = process.env.PORT || 3001
 app.listen(port, function () {
   console.log(`Express app running on port ${port}`)
 })
+
+app.listen(8080, () => console.log('listening on port 8080'))
