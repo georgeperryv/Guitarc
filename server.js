@@ -5,6 +5,7 @@ const util = require('util')
 const unlinkFile = util.promisify(fs.unlink)
 
 const Chord = require('./models/chord')
+const Song = require('./models/song')
 
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
@@ -97,11 +98,13 @@ app.post('/images/song-panel', upload.single('image'), async (req, res) => {
   const description = req.body.description
   console.log('description', description)
   console.log('here is req', req)
+  const activeSongId = await Song.find({ song: req.body.activeSong })
+  console.log('active song[0]._id', activeSongId[0]._id)
 
   const chord = new Chord({
     name: req.body.description,
-    song: req.body.activeSong,
     chordImage: result.Key,
+    song: activeSongId[0].id,
     learned: false
   })
   chord
