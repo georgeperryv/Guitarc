@@ -48,6 +48,8 @@ export default function ChordLibraryPage () {
           <img src={image}></img>
         </div>
       ))}
+
+      <img src='https://guitarchords.s3.us-west-1.amazonaws.com/4d5da0163052fa2d828f8e4a6feb24d8'></img>
     </div>
   )
 }
