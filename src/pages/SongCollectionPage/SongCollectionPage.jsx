@@ -6,7 +6,7 @@ import AddCategoryForm from '../../components/AddCategoryForm/AddCategoryForm'
 import SongList from '../../components/SongList/SongList'
 import AddSongForm from '../../components/AddSongForm/AddSongForm'
 import SongPanel from '../../components/SongPanel/SongPanel'
-import ChordSubmitOnSongPanel from '../../components/ChordSubmitOnSongPanel/ChordFormSongPanel'
+import ChordSubmitOnSongPanel from '../../components/ChordFormSongPanel/ChordFormSongPanel'
 
 export default function SongCollectionPage ({ user, setUser }) {
   //Category name of whatever is currently clicked. This is passed down to the category list

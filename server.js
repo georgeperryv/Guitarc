@@ -109,6 +109,17 @@ app.post('/images/song-panel', upload.single('image'), async (req, res) => {
   })
   chord
     .save()
+    .then(newResult => {
+      Song.find({ song: req.body.activeSong }, function (err, targetSong) {
+        console.log('targetSong', targetSong)
+        targetSong.forEach(element => {
+          console.log('element', element)
+          console.log('chord._id', chord._id)
+          element.chord.push(chord._id)
+          element.save(function (err) {})
+        })
+      })
+    })
     .then(result => {
       res.status(200).send({
         _id: r._id,
@@ -118,14 +129,16 @@ app.post('/images/song-panel', upload.single('image'), async (req, res) => {
         imagePath: `/images/${result.Key}`
       })
     })
+
     .catch(err => {
       res.send({ message: err })
     })
-  const updatedSongWithChord = await Song.updateMany(
-    { song: req.body.activeSong },
-    { $set: { chord: [chord._id] } }
-  )
-  console.log('this is updatedSongWithaChord', updatedSongWithChord)
+
+  // const updatedSongWithChord = await Song.updateMany(
+  //   { song: req.body.activeSong },
+  //   { $set: { ...chord, chord: [chord._id] } }
+  // )
+  // console.log('this is updatedSongWithaChord', updatedSongWithChord)
 
   // res.send({ imagePath: `/images/${result.Key}` })
 })
