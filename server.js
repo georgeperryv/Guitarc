@@ -39,6 +39,7 @@ app.use(require('./config/checkToken'))
 // http://localhost:3001/api/users
 app.use('/api/users', require('./routes/api/users'))
 const ensureLoggedIn = require('./config/ensureLoggedIn')
+const { isObjectIdOrHexString } = require('mongoose')
 app.use('/api/categories', ensureLoggedIn, require('./routes/api/category'))
 app.use('/api/songs', ensureLoggedIn, require('./routes/api/songs'))
 app.use('/api/chords', ensureLoggedIn, require('./routes/api/chords'))
@@ -102,13 +103,20 @@ app.post('/images/song-panel', upload.single('image'), async (req, res) => {
   console.log('here is req', req)
   const activeSongId = await Song.find({ song: req.body.activeSong })
   console.log('active song[0]._id', activeSongId[0]._id)
+  const decodedUser = JSON.parse(atob(req.body.user.split('.')[1]))
+  const userId = decodedUser.user._id
+  const ObjectId = require('mongodb').ObjectId
+  const userObjectId = new ObjectId(userId)
+  console.log('userObjectId', userObjectId)
+  // const userObjectId = decodedUser
+  // (atob(token.split('.')[1]))
 
   const chord = new Chord({
     name: req.body.description,
     chordImage: result.Key,
     song: activeSongId[0].id,
     learned: false,
-    user: req.user._id
+    user: userObjectId
   })
   chord
     .save()

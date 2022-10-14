@@ -5,13 +5,17 @@ import axios from 'axios'
 import * as ChordLibraryPage from '../../pages/ChordLibraryPage/ChordLibraryPage'
 
 async function postImage ({ image, description, activeSong }) {
+  const token = getToken()
+  console.log('this is token', token)
+
   const formData = new FormData()
   formData.append('image', image)
   formData.append('description', description)
   formData.append('activeSong', activeSong)
+  formData.append('user', token)
 
-  const token = getToken()
-  console.log('this is token', token)
+  // const token = localStorage.getItem('token')
+
   // const options = 'POST'
   // if (token) {
   const result = await axios.post('/images/song-panel', formData, {
