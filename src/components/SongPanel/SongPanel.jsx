@@ -17,6 +17,7 @@ export default function SongPanel ({
       //   }}
     >
       {c.name}
+      <img src={`/images/${c.chordImage}`}></img>
     </li>
   ))
   return <ul className='CategoryList'>{songList}</ul>
