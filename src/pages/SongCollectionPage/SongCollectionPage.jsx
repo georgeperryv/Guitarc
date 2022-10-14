@@ -106,7 +106,6 @@ export default function SongCollectionPage ({ user, setUser }) {
     [activeCat, activeSong, chordRefresh]
   )
 
-
   return (
     <div>
       <aside className='SongCollectionPage'>
@@ -118,6 +117,7 @@ export default function SongCollectionPage ({ user, setUser }) {
           makeUniqueCatMessage={makeUniqueCatMessage}
           setMakeUniqueCatMessage={setMakeUniqueCatMessage}
           setMakeUniqueSongMessage={setMakeUniqueSongMessage}
+          setActiveSong={setActiveSong}
         />
         <AddCategoryForm
           category={category}
