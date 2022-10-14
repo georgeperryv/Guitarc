@@ -28,7 +28,7 @@ export default function ChordLibraryPage () {
     event.preventDefault()
     const result = await postImage({ image: file, description })
     console.log('result', result)
-    await setImages([result.imagePath, ...images])
+    setImages([result.imagePath, ...images])
     console.log('images array', images)
   }
   console.log('images array 2', images)

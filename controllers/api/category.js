@@ -22,7 +22,7 @@ async function addCategory (req, res) {
 }
 
 async function index (req, res) {
-  const items = await Category.find({})
+  const items = await Category.find({ user: req.user._id })
     .sort('category')
     .populate('category')
     .exec()
