@@ -26,8 +26,11 @@ async function addSong (req, res) {
 
 async function getSongsFromCategory (req, res) {
   console.log('req.params.category', req.params.category)
-  const categoryId = await Category.findOne({ category: req.params.category })
-  const songs = await Song.find({ category: categoryId.id })
+  const categoryId = await Category.findOne({
+    category: req.params.category,
+    user: req.user._id
+  })
+  const songs = await Song.find({ category: categoryId.id, user: req.user._id })
     .sort('song')
     .populate('song')
     .exec()
