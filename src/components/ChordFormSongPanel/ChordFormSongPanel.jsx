@@ -17,13 +17,18 @@ async function postImage ({ image, description, activeSong }) {
   return result.data
 }
 
-export default function ChordSubmitOnSongPanel ({ activeSong }) {
+export default function ChordSubmitOnSongPanel ({
+  activeSong,
+  chordRefresh,
+  setChordRefresh
+}) {
   const [file, setFile] = useState()
   const [description, setDescription] = useState('')
   const [images, setImages] = useState([])
 
   const submit = async event => {
     event.preventDefault()
+    setChordRefresh([1])
     const result = await postImage({ image: file, description, activeSong })
     console.log('result', result)
     setImages([result.imagePath, ...images])

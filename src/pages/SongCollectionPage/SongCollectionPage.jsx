@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import CategoryList from '../../components/CategoryList/CategoryList'
 import * as categoriesAPI from '../../utilities/categories-api'
 import * as songsAPI from '../../utilities/songs-api'
+import * as chordsAPI from '../../utilities/chords-api'
 import AddCategoryForm from '../../components/AddCategoryForm/AddCategoryForm'
 import SongList from '../../components/SongList/SongList'
 import AddSongForm from '../../components/AddSongForm/AddSongForm'
@@ -43,6 +44,12 @@ export default function SongCollectionPage ({ user, setUser }) {
     song: ''
   })
 
+  //chords
+
+  const [chordsArray, setChordsArray] = useState([])
+
+  const [chordRefresh, setChordRefresh] = useState([])
+
   //useEffect for getting Categories into an array called Categories Array and updating based on categoriesRefresh
   useEffect(
     function () {
@@ -79,6 +86,26 @@ export default function SongCollectionPage ({ user, setUser }) {
     },
     [activeCat, songRefresh]
   )
+
+  //useEffect for updating the chord images that belong to a song every time chord refresh state is updated
+  useEffect(
+    function () {
+      async function getChords () {
+        const chords = await chordsAPI.getAllChords(activeSong)
+        console.log('were back with chords', chords)
+        setChordsArray(
+          chords.reduce((c, item) => {
+            const chord = item
+            return c.includes(chord) ? c : [...c, chord]
+          }, [])
+        )
+      }
+
+      getChords()
+    },
+    [activeCat, activeSong, chordRefresh]
+  )
+
 
   return (
     <div>
@@ -125,8 +152,16 @@ export default function SongCollectionPage ({ user, setUser }) {
       </div>
       {activeSong ? (
         <>
-          <SongPanel activeSong={activeSong} />
-          <ChordSubmitOnSongPanel activeSong={activeSong} />
+          <SongPanel
+            activeSong={activeSong}
+            chordsArray={chordsArray}
+            setChordsArray={setChordsArray}
+          />
+          <ChordSubmitOnSongPanel
+            activeSong={activeSong}
+            chordRefresh={chordRefresh}
+            setChordRefresh={setChordRefresh}
+          />
         </>
       ) : (
         <h1>nothing</h1>

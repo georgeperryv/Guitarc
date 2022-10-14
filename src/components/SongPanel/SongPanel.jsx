@@ -1,9 +1,23 @@
 import ChordLibraryPage from '../../pages/ChordLibraryPage/ChordLibraryPage'
 
-export default function SongPanel ({ activeSong }) {
-  return (
-    <>
-      <h1>{activeSong}</h1>
-    </>
-  )
+export default function SongPanel ({
+  activeSong,
+  chordsArray,
+  setChordsArray
+}) {
+  const songList = chordsArray.map(c => (
+    <li
+      key={c}
+      //   className={c === activeSong ? 'active' : ''}
+      // FYI, the below will also work, but will give a warning
+      // className={cat === activeCat && 'active'}
+      //   onClick={() => {
+      //     setActiveSong(s)
+      //     setMakeUniqueSongMessage('')
+      //   }}
+    >
+      {c.name}
+    </li>
+  ))
+  return <ul className='CategoryList'>{songList}</ul>
 }

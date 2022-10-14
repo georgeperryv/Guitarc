@@ -5,9 +5,9 @@ const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
 //GET
-// router.get('/songs-from-category/:category', songCtrl.getSongsFromCategory)
+router.get('/song-panel/:activeSong', chordCtrl.getAllSongChords)
 
 //POST
-router.post('/add-chord', upload.single('image'), chordCtrl.addChord)
+// router.post('/add-chord', upload.single('image'), chordCtrl.addChord)
 
 module.exports = router
