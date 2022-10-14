@@ -14,14 +14,15 @@ const { uploadFile } = require('../../s3')
 async function getAllSongChords (req, res) {
   const finalChordArray = []
   console.log('inside getAllSongChords')
-  const correctSong = await Song.find({ song: req.params.activeSong })
-  const arrayOfChords = await correctSong[0].chord
-  console.log('arrayOfChords', arrayOfChords)
-  console.log('findById(element)', await Chord.findById(arrayOfChords[0]))
+  const correctSong = await Song.find({
+    song: req.params.activeSong,
+    user: req.user._id
+  })
+  const arrayOfChords = correctSong[0].chord
+
   for (const element of arrayOfChords) {
-    const x = await Chord.findById(element)
-    console.log('this is new x', x)
-    finalChordArray.push(x)
+    const chordObject = await Chord.findById(element)
+    finalChordArray.push(chordObject)
   }
   //   arrayOfChords.forEach(async element => {
   //     const x = await Chord.findById(element)

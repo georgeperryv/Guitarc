@@ -21,7 +21,7 @@ async function postImage ({ image, description, activeSong }) {
   return result.data
 }
 
-export default function ChordSubmitOnSongPanel ({
+export default function ChordFormSognPanel ({
   activeSong,
   chordRefresh,
   setChordRefresh
@@ -32,18 +32,20 @@ export default function ChordSubmitOnSongPanel ({
 
   const submit = async event => {
     event.preventDefault()
-
     const result = await postImage({ image: file, description, activeSong })
     setChordRefresh([1])
+    setDescription('')
     console.log('result', result)
     setImages([result.imagePath, ...images])
     console.log('images array', images)
   }
-  console.log('images array 2', images)
+
   const fileSelected = event => {
     const file = event.target.files[0]
     setFile(file)
   }
+
+  console.log('images array 2', images)
 
   return (
     <div className='ChordSubmitOnSongPanel'>
@@ -53,16 +55,10 @@ export default function ChordSubmitOnSongPanel ({
           value={description}
           onChange={e => setDescription(e.target.value)}
           type='text'
+          required
         ></input>
         <button type='submit'>Submit</button>
       </form>
-      {images.map(image => (
-        <div key={image}>
-          {' '}
-          <img src={image}></img>
-        </div>
-      ))}
-      {/* <img src='/images/e884075b4d6bf0d5f0cf262c3364f097'></img> */}
     </div>
   )
 }
