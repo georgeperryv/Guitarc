@@ -1,12 +1,17 @@
 import { useState } from 'react'
+import { getToken } from '../../utilities/users-service'
 import axios from 'axios'
 
 import './ChordLibraryPage.css'
 
 async function postImage ({ image, description }) {
+  const token = getToken()
+  console.log('this is token', token)
+
   const formData = new FormData()
   formData.append('image', image)
   formData.append('description', description)
+  formData.append('user', token)
 
   const result = await axios.post('/images', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }

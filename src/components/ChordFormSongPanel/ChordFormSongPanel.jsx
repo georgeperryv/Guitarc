@@ -14,15 +14,10 @@ async function postImage ({ image, description, activeSong }) {
   formData.append('activeSong', activeSong)
   formData.append('user', token)
 
-  // const token = localStorage.getItem('token')
-
-  // const options = 'POST'
-  // if (token) {
   const result = await axios.post('/images/song-panel', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   })
-  console.log('this is result in the post image fucntion', result)
-  console.log('result.data', result.data)
+
   return result.data
 }
 

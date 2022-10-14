@@ -62,17 +62,19 @@ app.get('/*', function (req, res) {
 
 app.post('/images', upload.single('image'), async (req, res) => {
   const file = req.file
-  console.log('file', file)
   const result = await uploadFile(file)
-  console.log('result', result)
   await unlinkFile(file.path)
   const description = req.body.description
-  console.log('description', description)
+  const decodedUser = JSON.parse(atob(req.body.user.split('.')[1]))
+  const userId = decodedUser.user._id
+  const ObjectId = require('mongodb').ObjectId
+  const userObjectId = new ObjectId(userId)
 
   const chord = new Chord({
     name: req.body.description,
     chordImage: result.Key,
-    learned: false
+    learned: false,
+    user: userObjectId
   })
   chord
     .save()
@@ -82,7 +84,8 @@ app.post('/images', upload.single('image'), async (req, res) => {
         name: req.body.description,
         chordImage: result.Key,
         learned: false,
-        user: req.user._id
+        user: userObjectId,
+        imagePath: `/images/${result.Key}`
       })
     })
     .catch(err => {
@@ -93,26 +96,17 @@ app.post('/images', upload.single('image'), async (req, res) => {
 
 app.post('/images/song-panel', upload.single('image'), async (req, res) => {
   const file = req.file
-  console.log('file', file)
-  console.log('req.body', req.body)
   const result = await uploadFile(file)
-  console.log('result', result)
   await unlinkFile(file.path)
   const description = req.body.description
-  console.log('description', description)
-  console.log('here is req', req)
   const activeSongId = await Song.find({ song: req.body.activeSong })
-  console.log('active song[0]._id', activeSongId[0]._id)
   const decodedUser = JSON.parse(atob(req.body.user.split('.')[1]))
   const userId = decodedUser.user._id
   const ObjectId = require('mongodb').ObjectId
   const userObjectId = new ObjectId(userId)
-  console.log('userObjectId', userObjectId)
-  // const userObjectId = decodedUser
-  // (atob(token.split('.')[1]))
 
   const chord = new Chord({
-    name: req.body.description,
+    name: description,
     chordImage: result.Key,
     song: activeSongId[0].id,
     learned: false,
@@ -137,6 +131,7 @@ app.post('/images/song-panel', upload.single('image'), async (req, res) => {
         name: req.body.description,
         chordImage: result.Key,
         learned: false,
+        user: userObjectId,
         imagePath: `/images/${result.Key}`
       })
     })
