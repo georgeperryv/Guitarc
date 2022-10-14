@@ -9,9 +9,11 @@ async function addSong (req, res) {
       console.log('not new try again')
       return res.json('Please enter a unique song')
     } else {
+      console.log('inside the else for addSong')
       const song = new Song({
         song: req.body.song,
-        category: await Category.findOne({ category: req.body.activeCat })
+        category: await Category.findOne({ category: req.body.activeCat }),
+        user: req.user._id
       })
       await song.save()
 

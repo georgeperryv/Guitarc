@@ -8,7 +8,8 @@ const songSchema = new Schema(
   {
     song: { type: String, required: true },
     category: { type: Schema.Types.ObjectId, ref: 'Category' },
-    chord: [{ type: Schema.Types.ObjectId, ref: 'Chord' }]
+    chord: [{ type: Schema.Types.ObjectId, ref: 'Chord' }],
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
   },
   {
     timestamps: true

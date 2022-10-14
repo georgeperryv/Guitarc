@@ -80,7 +80,8 @@ app.post('/images', upload.single('image'), async (req, res) => {
         _id: r._id,
         name: req.body.description,
         chordImage: result.Key,
-        learned: false
+        learned: false,
+        user: req.user._id
       })
     })
     .catch(err => {
@@ -92,6 +93,7 @@ app.post('/images', upload.single('image'), async (req, res) => {
 app.post('/images/song-panel', upload.single('image'), async (req, res) => {
   const file = req.file
   console.log('file', file)
+  console.log('req.body', req.body)
   const result = await uploadFile(file)
   console.log('result', result)
   await unlinkFile(file.path)
@@ -105,7 +107,8 @@ app.post('/images/song-panel', upload.single('image'), async (req, res) => {
     name: req.body.description,
     chordImage: result.Key,
     song: activeSongId[0].id,
-    learned: false
+    learned: false,
+    user: req.user._id
   })
   chord
     .save()

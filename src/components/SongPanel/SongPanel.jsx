@@ -5,20 +5,17 @@ export default function SongPanel ({
   chordsArray,
   setChordsArray
 }) {
-  const songList = chordsArray.map(c => (
-    <li
-      key={c}
-      //   className={c === activeSong ? 'active' : ''}
-      // FYI, the below will also work, but will give a warning
-      // className={cat === activeCat && 'active'}
-      //   onClick={() => {
-      //     setActiveSong(s)
-      //     setMakeUniqueSongMessage('')
-      //   }}
-    >
-      {c.name}
-      <img src={`/images/${c.chordImage}`}></img>
-    </li>
-  ))
-  return <ul className='CategoryList'>{songList}</ul>
+  const chordList = ''
+  console.log('this is chordsArray', chordsArray)
+  if (chordsArray) {
+    const chordList = chordsArray.map(c => (
+      <li key={c}>
+        {c.name}
+        <img src={`/images/${c.chordImage}`}></img>
+      </li>
+    ))
+  } else {
+    chordList = ''
+  }
+  return <ul className='CategoryList'>{chordList ? chordList : 'empty'}</ul>
 }

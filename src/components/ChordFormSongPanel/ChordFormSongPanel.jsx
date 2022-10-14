@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { getToken } from '../../utilities/users-service'
 import axios from 'axios'
 
 import * as ChordLibraryPage from '../../pages/ChordLibraryPage/ChordLibraryPage'
@@ -9,6 +10,10 @@ async function postImage ({ image, description, activeSong }) {
   formData.append('description', description)
   formData.append('activeSong', activeSong)
 
+  const token = getToken()
+  console.log('this is token', token)
+  // const options = 'POST'
+  // if (token) {
   const result = await axios.post('/images/song-panel', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   })
