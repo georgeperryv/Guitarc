@@ -28,8 +28,9 @@ export default function ChordSubmitOnSongPanel ({
 
   const submit = async event => {
     event.preventDefault()
-    setChordRefresh([1])
+
     const result = await postImage({ image: file, description, activeSong })
+    setChordRefresh([1])
     console.log('result', result)
     setImages([result.imagePath, ...images])
     console.log('images array', images)
