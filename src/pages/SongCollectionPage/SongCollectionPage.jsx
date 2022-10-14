@@ -46,6 +46,8 @@ export default function SongCollectionPage ({ user, setUser }) {
 
   //chords
 
+  const [activeChord, setActiveChord] = useState('')
+
   const [chordsArray, setChordsArray] = useState([])
 
   const [chordRefresh, setChordRefresh] = useState([])
@@ -147,7 +149,7 @@ export default function SongCollectionPage ({ user, setUser }) {
             />
           </>
         ) : (
-          <h1>nothing</h1>
+          <h1></h1>
         )}
       </div>
       {activeSong ? (
@@ -156,6 +158,8 @@ export default function SongCollectionPage ({ user, setUser }) {
             activeSong={activeSong}
             chordsArray={chordsArray}
             setChordsArray={setChordsArray}
+            activeChord={activeChord}
+            setActiveChord={setActiveChord}
           />
           <ChordSubmitOnSongPanel
             activeSong={activeSong}
@@ -164,7 +168,7 @@ export default function SongCollectionPage ({ user, setUser }) {
           />
         </>
       ) : (
-        <h1>nothing</h1>
+        <h1></h1>
       )}
     </div>
   )
