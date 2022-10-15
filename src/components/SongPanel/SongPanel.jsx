@@ -14,17 +14,17 @@ export default function SongPanel ({
 
   const temp = useRef([])
 
-  const toggleImage = c => {
-    setToggled(!toggled)
-    if (!temp.current.includes(c.chordImage)) {
-      temp.current.push(c.chordImage)
-      setImageArray(temp)
-    }
-    console.log('this is temp', temp)
-    // setImageArray(...imageArray, temp)
+  //   const toggleImage = c => {
+  //     setToggled(!toggled)
+  //     if (!temp.current.includes(c.chordImage)) {
+  //       temp.current.push(c.chordImage)
+  //       setImageArray(temp)
+  //     }
+  //     console.log('this is temp', temp)
+  //     // setImageArray(...imageArray, temp)
 
-    setActiveChord(c.chordImage)
-  }
+  //     setActiveChord(c.chordImage)
+  //   }
 
   const addOrRemoveImage = c => {
     if (temp.current.includes(c.chordImage)) {
@@ -34,6 +34,17 @@ export default function SongPanel ({
     } else {
       temp.current.push(c.chordImage)
       console.log('temp.current just pushed', temp.current)
+      setActiveChord(c.chordImage)
+    }
+  }
+
+  const checkImageDisplay = c => {
+    if (temp.current.includes(c.chordImage)) {
+      console.log('inside the if temp.current', temp.current)
+      return false
+    } else {
+      console.log('inside the else temp.current', temp.current)
+      return true
     }
   }
 
@@ -44,13 +55,17 @@ export default function SongPanel ({
       className={c === activeChord ? 'active' : ''}
       onClick={() => {
         setActiveChord(c)
-        // toggleImage(c)
         addOrRemoveImage(c)
       }}
     >
       {c.name}
       <div>
-        <img onClick={() => {}} />
+        {temp.current.includes(c.chordImage) && activeChord === c.chordImage ? (
+          //   temp.current.map(i => {
+          <img src={`/images/${c.chordImage}`} />
+        ) : (
+          <h2>False</h2>
+        )}
       </div>
     </li>
   ))
@@ -59,13 +74,13 @@ export default function SongPanel ({
     <>
       <ul className='CategoryList'>{chordList}</ul>
       <div>
-        {temp.current.map(imageId => {
+        {/* {temp.current.map(imageId => {
           console.log('this is imageIDdd', imageId)
           var li = document.getElementById(imageId)
           console.log('this is li')
 
           return <img src={`/images/${imageId}`} />
-        })}
+        })} */}
         {/* <img src='/images/31f7b7f02a951db2cce0818a87cb2f01' /> */}
       </div>
     </>
