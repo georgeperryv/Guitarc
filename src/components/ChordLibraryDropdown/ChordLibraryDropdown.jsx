@@ -10,8 +10,7 @@ export default function ChordLibraryDropdown ({ chordsArray }) {
   const [selected, setSelected] = useState('')
 
   const handleChange = event => {
-    console.log('hi')
-    console.log('handle change', event.value.props.children[0])
+    console.log('handle change', event.value.props)
     setSelected(event.value.props.children[0])
   }
 
@@ -43,7 +42,11 @@ export default function ChordLibraryDropdown ({ chordsArray }) {
         onChange={handleChange}
         placeholder='Select an option'
       />
-      <ChordDetail selected={selected} setSelected={setSelected} />
+      <ChordDetail
+        selected={selected}
+        setSelected={setSelected}
+        chordsArray={chordsArray}
+      />
     </>
   )
 }
