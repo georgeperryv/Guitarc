@@ -60,11 +60,11 @@ export default function SongPanel ({
     >
       {c.name}
       <div>
-        {temp.current.includes(c.chordImage) && activeChord === c.chordImage ? (
-          //   temp.current.map(i => {
+        {console.log('this is temp.current', temp.current)}
+        {temp.current.includes(c.chordImage) ? (
           <img src={`/images/${c.chordImage}`} />
         ) : (
-          <h2>False</h2>
+          ''
         )}
       </div>
     </li>
