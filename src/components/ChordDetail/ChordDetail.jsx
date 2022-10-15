@@ -28,6 +28,7 @@ export default function ChordDetail ({ selected, setSelected, chordsArray }) {
         <span>Number of Saved Songs With This Chord: </span>
         {desiredChord.song.length}
       </li>
+      <img src={`/images/${desiredChord.chordImage}`} />
     </ul>
   ) : (
     <h1>hello</h1>
