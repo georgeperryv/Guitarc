@@ -52,7 +52,7 @@ export default function ChordLibraryDropdown ({
   //   //   }
   console.log('chords array getting passed in', chordsArray)
   const chordList = chordsArray.map(c => (
-    <li
+    <div
       id={c.chordName}
       key={c.chordName}
       // className={c === activeChord ? 'active' : ''}
@@ -71,14 +71,15 @@ export default function ChordLibraryDropdown ({
             ''
           )}
         </div> */}
-    </li>
+    </div>
   ))
 
   //   const options = ['one', 'two', 'three']
   return (
     <>
       {/* <Dropdown options={options} value={5} placeholder='Select an option' /> */}
-      <ul className='CategoryList'>{chordList}</ul>
+      {/* <ul className='CategoryList'>{chordList}</ul> */}
+      <Dropdown options={chordList} placeholder='Select an option' />
     </>
   )
 }
