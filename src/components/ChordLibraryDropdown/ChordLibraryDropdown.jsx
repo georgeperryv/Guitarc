@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 // import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
+import './ChordLibraryDropdown.css'
 
 export default function ChordLibraryDropdown ({
   chordsArray,
@@ -51,28 +52,55 @@ export default function ChordLibraryDropdown ({
   //   //     }
   //   //   }
   console.log('chords array getting passed in', chordsArray)
-  const chordList = chordsArray.map(c => (
-    <div
-      id={c.chordName}
-      key={c.chordName}
-      // className={c === activeChord ? 'active' : ''}
-      onClick={() => {
-        // setChordRefresh([1])
-        //   setActiveChord(c)
-        //   addOrRemoveImage(c)
-      }}
-    >
-      {c.name}
-      {/* <div>
-          {console.log('this is temp.current', temp.current)}
-          {temp.current.includes(c.chordImage) ? (
-            <img src={`/images/${c.chordImage}`} />
-          ) : (
-            ''
-          )}
-        </div> */}
-    </div>
-  ))
+  const chordList = chordsArray.map(c =>
+    c.learned ? (
+      <div
+        classname='ChordLibraryDropDown'
+        class='greenLabel'
+        key={c.chordName}
+        // className={c === activeChord ? 'active' : ''}
+        onClick={() => {
+          // setChordRefresh([1])
+          //   setActiveChord(c)
+          //   addOrRemoveImage(c)
+        }}
+      >
+        {c.name}
+        {console.log(c.learned)}
+        {/* <div>
+            {console.log('this is temp.current', temp.current)}
+            {temp.current.includes(c.chordImage) ? (
+              <img src={`/images/${c.chordImage}`} />
+            ) : (
+              ''
+            )}
+          </div> */}
+      </div>
+    ) : (
+      <div
+        classname='ChordLibraryDropDown'
+        class='redLabel'
+        key={c.chordName}
+        // className={c === activeChord ? 'active' : ''}
+        onClick={() => {
+          // setChordRefresh([1])
+          //   setActiveChord(c)
+          //   addOrRemoveImage(c)
+        }}
+      >
+        {c.name}
+        {console.log(c.learned)}
+        {/* <div>
+            {console.log('this is temp.current', temp.current)}
+            {temp.current.includes(c.chordImage) ? (
+              <img src={`/images/${c.chordImage}`} />
+            ) : (
+              ''
+            )}
+          </div> */}
+      </div>
+    )
+  )
 
   //   const options = ['one', 'two', 'three']
   return (
