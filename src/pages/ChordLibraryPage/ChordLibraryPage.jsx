@@ -54,7 +54,7 @@ export default function ChordLibraryPage () {
           <img src={image}></img>
         </div>
       ))}
-      <img src='/images/dab922f26fdd4f5023284df57e374d61'></img>
+      {/* <img src='/images/dab922f26fdd4f5023284df57e374d61'></img> */}
     </div>
   )
 }

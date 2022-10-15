@@ -105,7 +105,7 @@ export default function SongCollectionPage ({ user, setUser }) {
 
       getChords()
     },
-    [activeCat, activeSong, chordRefresh]
+    [activeCat, activeSong, chordRefresh, activeChord]
   )
 
   return (
@@ -165,6 +165,7 @@ export default function SongCollectionPage ({ user, setUser }) {
             activeSong={activeSong}
             chordRefresh={chordRefresh}
             setChordRefresh={setChordRefresh}
+            setChords
           />
         </>
       ) : (
