@@ -22,12 +22,7 @@ async function postImage ({ image, description }) {
   return result.data
 }
 
-export default function ChordLibraryPage (
-  getCategories,
-  chordArray,
-  chordRefresh,
-  setChordRefresh
-) {
+export default function ChordLibraryPage (getCategories, chordArray) {
   const [file, setFile] = useState()
   const [description, setDescription] = useState('')
   const [images, setImages] = useState([])
@@ -37,11 +32,13 @@ export default function ChordLibraryPage (
   const [activeChord, setActiveChord] = useState('')
 
   const [chordsArray, setChordsArray] = useState([])
+  const [chordRefresh, setChordRefresh] = useState([])
+
+  // const [hasLoaded, setHasLoaded] = useState()
 
   // const [chordRefresh, setChordRefresh] = useState([])
 
   const submit = async event => {
-    setChordRefresh([1])
     event.preventDefault()
     const result = await postImage({ image: file, description })
     setChordRefresh([1])
@@ -60,7 +57,7 @@ export default function ChordLibraryPage (
 
   useEffect(
     function () {
-      async function getChords () {
+      async function getChords2 () {
         const chords = await chordsAPI.getAllIndependentChords()
         console.log('were back with chords', chords)
         setChordsArray(
@@ -71,7 +68,7 @@ export default function ChordLibraryPage (
         )
         console.log('this is the NEWW chordsArray', chordsArray)
       }
-      const myTimeout = setTimeout(getChords, 1000)
+      const myTimeout = setTimeout(getChords2, 1000)
     },
     [chordRefresh]
   )
