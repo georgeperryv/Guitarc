@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import * as ChordLibraryPage from '../../pages/ChordLibraryPage/ChordLibraryPage'
 
-async function postImage ({ image, description, activeSong }) {
+async function postImage ({ image, description, activeSong, setChordRefresh }) {
   const token = getToken()
   console.log('this is token', token)
 

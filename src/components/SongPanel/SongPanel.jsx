@@ -6,7 +6,9 @@ export default function SongPanel ({
   chordsArray,
   setChordsArray,
   activeChord,
-  setActiveChord
+  setActiveChord,
+  setChordRefresh,
+  ChordRefresh
 }) {
   const [toggled, setToggled] = useState([])
 
@@ -30,23 +32,25 @@ export default function SongPanel ({
     if (temp.current.includes(c.chordImage)) {
       const index = temp.current.indexOf(c.chordImage)
       temp.current.splice(index, 1)
+      //   setChordRefresh([1])
       console.log('temp.current just popped', temp.current)
     } else {
       temp.current.push(c.chordImage)
       console.log('temp.current just pushed', temp.current)
+      //   setChordRefresh([1])
       setActiveChord(c.chordImage)
     }
   }
 
-  const checkImageDisplay = c => {
-    if (temp.current.includes(c.chordImage)) {
-      console.log('inside the if temp.current', temp.current)
-      return false
-    } else {
-      console.log('inside the else temp.current', temp.current)
-      return true
-    }
-  }
+  //   const checkImageDisplay = c => {
+  //     if (temp.current.includes(c.chordImage)) {
+  //       console.log('inside the if temp.current', temp.current)
+  //       return false
+  //     } else {
+  //       console.log('inside the else temp.current', temp.current)
+  //       return true
+  //     }
+  //   }
 
   const chordList = chordsArray.map(c => (
     <li
@@ -54,6 +58,7 @@ export default function SongPanel ({
       key={c.chordName}
       className={c === activeChord ? 'active' : ''}
       onClick={() => {
+        // setChordRefresh([1])
         setActiveChord(c)
         addOrRemoveImage(c)
       }}

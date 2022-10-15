@@ -7,7 +7,7 @@ import AddCategoryForm from '../../components/AddCategoryForm/AddCategoryForm'
 import SongList from '../../components/SongList/SongList'
 import AddSongForm from '../../components/AddSongForm/AddSongForm'
 import SongPanel from '../../components/SongPanel/SongPanel'
-import ChordSubmitOnSongPanel from '../../components/ChordFormSongPanel/ChordFormSongPanel'
+import ChordFormSongPanel from '../../components/ChordFormSongPanel/ChordFormSongPanel'
 
 export default function SongCollectionPage ({ user, setUser }) {
   //Category name of whatever is currently clicked. This is passed down to the category list
@@ -105,7 +105,7 @@ export default function SongCollectionPage ({ user, setUser }) {
 
       getChords()
     },
-    [activeCat, activeSong, chordRefresh, activeChord]
+    [activeCat, activeSong, chordRefresh, setChordRefresh, activeChord]
   )
 
   return (
@@ -160,12 +160,15 @@ export default function SongCollectionPage ({ user, setUser }) {
             setChordsArray={setChordsArray}
             activeChord={activeChord}
             setActiveChord={setActiveChord}
+            chordRefresh={chordRefresh}
+            setChordRefresh={setChordRefresh}
           />
-          <ChordSubmitOnSongPanel
+          <ChordFormSongPanel
             activeSong={activeSong}
             chordRefresh={chordRefresh}
             setChordRefresh={setChordRefresh}
             setChords
+            setChordRefresh={setChordRefresh}
           />
         </>
       ) : (
