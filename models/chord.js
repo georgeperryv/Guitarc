@@ -9,7 +9,7 @@ const chordSchema = new Schema(
     chordImage: { type: String },
     song: [{ type: Schema.Types.ObjectId, ref: 'Song' }],
     learned: { type: Boolean, required: true },
-    user: { type: Schema.Types.ObjectId, ref: 'User', required: true }
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
   },
   {
     timestamps: true

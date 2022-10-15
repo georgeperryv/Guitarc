@@ -88,6 +88,7 @@ export default function SongPanel ({
         })} */}
         {/* <img src='/images/31f7b7f02a951db2cce0818a87cb2f01' /> */}
       </div>
+      <img src='/images/Screen Shot 2022-10-15 at 10.46.19 AM.png' />
     </>
   )
 }
