@@ -103,7 +103,7 @@ export default function SongCollectionPage ({ user, setUser }) {
         )
         console.log('this is the NEWW chordsArray', chordsArray)
       }
-      const myTimeout = setTimeout(getChords, 10)
+      const myTimeout = setTimeout(getChords, 1000)
     },
     [activeCat, activeSong, chordRefresh, activeChord]
   )
