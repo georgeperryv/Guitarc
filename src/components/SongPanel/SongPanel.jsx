@@ -1,5 +1,9 @@
 import ChordLibraryPage from '../../pages/ChordLibraryPage/ChordLibraryPage'
 import { useState, useEffect, useRef } from 'react'
+// import Dropdown from 'react-bootstrap/Dropdown'
+// import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 
 export default function SongPanel ({
   activeSong,
@@ -75,20 +79,11 @@ export default function SongPanel ({
     </li>
   ))
 
+  const options = ['one', 'two', 'three']
   return (
     <>
+      <Dropdown options={options} value={5} placeholder='Select an option' />
       <ul className='CategoryList'>{chordList}</ul>
-      <div>
-        {/* {temp.current.map(imageId => {
-          console.log('this is imageIDdd', imageId)
-          var li = document.getElementById(imageId)
-          console.log('this is li')
-
-          return <img src={`/images/${imageId}`} />
-        })} */}
-        {/* <img src='/images/31f7b7f02a951db2cce0818a87cb2f01' /> */}
-      </div>
-      <img src='/images/Screen Shot 2022-10-15 at 10.46.19 AM.png' />
     </>
   )
 }
