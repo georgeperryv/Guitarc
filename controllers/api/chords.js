@@ -12,6 +12,7 @@ const { uploadFile } = require('../../s3')
 // }
 
 async function getAllSongChords (req, res) {
+    try{
   const finalChordArray = []
   console.log('inside getAllSongChords')
   const correctSong = await Song.find({
@@ -44,6 +45,9 @@ async function getAllSongChords (req, res) {
 
   res.json(finalChordArray)
 }
+catch{
+    res.json('Please attach an image of the chord')
+}}
 
 module.exports = {
   getAllSongChords

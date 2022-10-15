@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import * as ChordLibraryPage from '../../pages/ChordLibraryPage/ChordLibraryPage'
 
-async function postImage ({ image, description, activeSong, setChordRefresh }) {
+async function postImage ({ image, description, activeSong }) {
   const token = getToken()
   console.log('this is token', token)
 
@@ -21,7 +21,7 @@ async function postImage ({ image, description, activeSong, setChordRefresh }) {
   return result.data
 }
 
-export default function ChordFormSognPanel ({
+export default function ChordFormSongPanel ({
   activeSong,
   chordRefresh,
   setChordRefresh
@@ -32,12 +32,14 @@ export default function ChordFormSognPanel ({
 
   const submit = async event => {
     event.preventDefault()
+
     const result = await postImage({ image: file, description, activeSong })
-    setChordRefresh([1])
+    const myTimeout = setTimeout(setChordRefresh([1]), 5000)
     setDescription('')
     console.log('result', result)
     setImages([result.imagePath, ...images])
     console.log('images array', images)
+    console.log('result outside', result)
   }
 
   const fileSelected = event => {
@@ -50,7 +52,12 @@ export default function ChordFormSognPanel ({
   return (
     <div className='ChordSubmitOnSongPanel'>
       <form onSubmit={submit}>
-        <input onChange={fileSelected} type='file' accept='image/*'></input>
+        <input
+          onChange={fileSelected}
+          type='file'
+          accept='image/*'
+          required
+        ></input>
         <input
           value={description}
           onChange={e => setDescription(e.target.value)}

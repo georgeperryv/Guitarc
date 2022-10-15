@@ -101,11 +101,11 @@ export default function SongCollectionPage ({ user, setUser }) {
             return c.includes(chord) ? c : [...c, chord]
           }, [])
         )
+        console.log('this is the NEWW chordsArray', chordsArray)
       }
-
-      getChords()
+      const myTimeout = setTimeout(getChords, 10)
     },
-    [activeCat, activeSong, chordRefresh, setChordRefresh, activeChord]
+    [activeCat, activeSong, chordRefresh, activeChord]
   )
 
   return (
@@ -166,8 +166,6 @@ export default function SongCollectionPage ({ user, setUser }) {
           <ChordFormSongPanel
             activeSong={activeSong}
             chordRefresh={chordRefresh}
-            setChordRefresh={setChordRefresh}
-            setChords
             setChordRefresh={setChordRefresh}
           />
         </>
