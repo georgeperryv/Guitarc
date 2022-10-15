@@ -12,15 +12,37 @@ import { getUser } from '../../utilities/users-service'
 function App () {
   // set the user by calling getUser function
   const [user, setUser] = useState(getUser())
+  const [chordRefresh, setChordRefresh] = useState([])
 
   return (
     <main className='App'>
       {user ? (
         <>
-          <NavBar user={user} setUser={setUser} />
+          <NavBar
+            user={user}
+            setUser={setUser}
+            chordRefresh={chordRefresh}
+            setChordRefresh={setChordRefresh}
+          />
           <Routes>
-            <Route path='/chord-library' element={<ChordLibraryPage />} />
-            <Route path='/song-collection' element={<SongCollectionPage />} />
+            <Route
+              path='/chord-library'
+              element={
+                <ChordLibraryPage
+                  chordRefresh={chordRefresh}
+                  setChordRefresh={setChordRefresh}
+                />
+              }
+            />
+            <Route
+              path='/song-collection'
+              element={
+                <SongCollectionPage
+                  chordRefresh={chordRefresh}
+                  setChordRefresh={setChordRefresh}
+                />
+              }
+            />
             <Route path='/orders' element={<OrderHistoryPage />} />
           </Routes>
         </>

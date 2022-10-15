@@ -7,3 +7,9 @@ export function getAllChords (activeSong) {
   //   console.log('this is songObject', songObject)
   return sendRequest(`${BASE_URL}/song-panel/${activeSong}`, 'GET')
 }
+
+export function getAllIndependentChords () {
+  // Just send itemId for best security (no pricing)
+  //   console.log('this is songObject', songObject)
+  return sendRequest(`${BASE_URL}/chord-library`)
+}

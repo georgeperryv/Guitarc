@@ -9,7 +9,12 @@ import AddSongForm from '../../components/AddSongForm/AddSongForm'
 import SongPanel from '../../components/SongPanel/SongPanel'
 import ChordFormSongPanel from '../../components/ChordFormSongPanel/ChordFormSongPanel'
 
-export default function SongCollectionPage ({ user, setUser }) {
+export default function SongCollectionPage ({
+  user,
+  setUser,
+  chordRefresh,
+  setChordRefresh
+}) {
   //Category name of whatever is currently clicked. This is passed down to the category list
   const [activeCat, setActiveCat] = useState('')
 
@@ -50,7 +55,7 @@ export default function SongCollectionPage ({ user, setUser }) {
 
   const [chordsArray, setChordsArray] = useState([])
 
-  const [chordRefresh, setChordRefresh] = useState([])
+  // const [chordRefresh, setChordRefresh] = useState([])
 
   //useEffect for getting Categories into an array called Categories Array and updating based on categoriesRefresh
   useEffect(

@@ -12,43 +12,66 @@ const { uploadFile } = require('../../s3')
 // }
 
 async function getAllSongChords (req, res) {
-    try{
-  const finalChordArray = []
-  console.log('inside getAllSongChords')
-  const correctSong = await Song.find({
-    song: req.params.activeSong,
-    user: req.user._id
-  })
-  const arrayOfChords = correctSong[0].chord
+  try {
+    var finalChordArray = []
+    console.log('inside getAllSongChords')
+    const correctSong = await Song.find({
+      song: req.params.activeSong,
+      user: req.user._id
+    })
+    const arrayOfChords = correctSong[0].chord
 
-  for (const element of arrayOfChords) {
-    const chordObject = await Chord.findById(element)
-    finalChordArray.push(chordObject)
-  }
-  //   arrayOfChords.forEach(async element => {
-  //     const x = await Chord.findById(element)
-  //     console.log('x', x)
-  //     finalChordArray.push(x)
+    for (const element of arrayOfChords) {
+      const chordObject = await Chord.findById(element)
+      finalChordArray.push(chordObject)
+    }
+    //   arrayOfChords.forEach(async element => {
+    //     const x = await Chord.findById(element)
+    //     console.log('x', x)
+    //     finalChordArray.push(x)
 
-  //     // finalChordArray.save(function (err) {})
-  //   })
-  console.log('finalChordArray123', finalChordArray)
+    //     // finalChordArray.save(function (err) {})
+    //   })
+    console.log('finalChordArray123', finalChordArray)
 
-  // })
-  //   const songs = await Song.find({ category: categoryId.id })
-  //     .sort('song')
-  //     .populate('song')
-  //     .exec()
-  //   // re-sort based upon the sortOrder of the categories
-  //   songs.sort((a, b) => a.song.sortOrder - b.song.sortOrder)
-  //   console.log('songs', songs)
+    // })
+    //   const songs = await Song.find({ category: categoryId.id })
+    //     .sort('song')
+    //     .populate('song')
+    //     .exec()
+    //   // re-sort based upon the sortOrder of the categories
+    //   songs.sort((a, b) => a.song.sortOrder - b.song.sortOrder)
+    //   console.log('songs', songs)
 
-  res.json(finalChordArray)
-}
-catch{
+    res.json(finalChordArray)
+  } catch {
     res.json('Please attach an image of the chord')
-}}
+  }
+}
+
+async function getAllIndependentChords (req, res) {
+  try {
+    var totalChordArray = []
+    console.log('inside getAllIndependentChords')
+    const allChords = await Chord.find({ user: req.user._id })
+    console.log('allChords12', allChords)
+    // const arrayOfChords = allChords[0].name
+    // console.log('arrayOfChords12', arrayOfChords)
+
+    // for (const element of arrayOfChords) {
+    //   const chordObject = await Chord.findById(element)
+    //   totalChordArray.push(chordObject)
+    // }
+
+    // console.log('finalIndependentChordArray123', finalChordArray)
+
+    res.json(allChords)
+  } catch {
+    res.json('Didnt work')
+  }
+}
 
 module.exports = {
-  getAllSongChords
+  getAllSongChords,
+  getAllIndependentChords
 }
