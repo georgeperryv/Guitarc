@@ -12,4 +12,7 @@ router.get('/chord-library', chordCtrl.getAllIndependentChords)
 //POST
 // router.post('/add-chord', upload.single('image'), chordCtrl.addChord)
 
+//PUT
+router.put('/change-learned-status/:chordId', chordCtrl.changeLearnedStatus)
+
 module.exports = router
