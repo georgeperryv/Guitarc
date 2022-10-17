@@ -19,3 +19,10 @@ export function changeLearnedStatus (chordId) {
   //   console.log('this is songObject', songObject)
   return sendRequest(`${BASE_URL}/change-learned-status/${chordId}`, 'PUT')
 }
+
+export function attachChord (activeChordId, activeSong) {
+  return sendRequest(
+    `${BASE_URL}/attach-chord/${activeChordId}/${activeSong}`,
+    'PUT'
+  )
+}

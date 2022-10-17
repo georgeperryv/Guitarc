@@ -96,8 +96,31 @@ async function changeLearnedStatus (req, res) {
   }
 }
 
+async function attachChord (req, res) {
+  //   console.log('inside attachChord12')
+  try {
+    // console.log('active songgg', req.params.activeSong)
+    const song = await Song.find({ song: req.params.activeSong })
+    // console.log('this is the BEST song', song)
+    const chord = await Chord.findByIdAndUpdate(req.params.activeChordId, {
+      $set: { song: [song._id] }
+    })
+    // console.log('this is the BEST chord', chord)
+    await chord.save()
+    //     const updatedSong = await Song.findByIdAndUpdate(song._id, {
+    //       $set: { chord: [chord._id] }
+    //     })
+    //     await updatedSong.save()
+    res.json('worked')
+  } catch {
+    console.log('im here')
+    res.json('Didnt work')
+  }
+}
+
 module.exports = {
   getAllSongChords,
   getAllIndependentChords,
-  changeLearnedStatus
+  changeLearnedStatus,
+  attachChord
 }

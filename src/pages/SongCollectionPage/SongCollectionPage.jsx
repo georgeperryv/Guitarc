@@ -56,6 +56,8 @@ export default function SongCollectionPage ({ user, setUser }) {
 
   const [activeChordId, setActiveChordId] = useState('')
 
+  const [attachButton, setAttachButton] = useState([])
+
   // const [chordRefresh, setChordRefresh] = useState([])
 
   //useEffect for getting Categories into an array called Categories Array and updating based on categoriesRefresh
@@ -83,6 +85,7 @@ export default function SongCollectionPage ({ user, setUser }) {
   useEffect(
     function () {
       async function getSongs () {
+        console.log('successfully inside getSongs use effect', activeCat)
         const songs = await songsAPI.getSongsFromCategory(activeCat)
         console.log('were back with songs', songs)
         setSongsArray(
@@ -145,22 +148,23 @@ export default function SongCollectionPage ({ user, setUser }) {
   //   setSelected(event.value.props.children[0])
   // }
 
-  // useEffect(
-  //   function () {
-  //     async function attachChord () {
-  //       // const attach = await chordsAPI.attachChord(activeChordId)
-  //       // setCategoriesArray(
-  //       //   categories.reduce((cats, item) => {
-  //       //     const cat = item.category
-  //       //     return cats.includes(cat) ? cats : [...cats, cat]
-  //       //   }, [])
-  //       // )
-  //     }
+  console.log('this is active songggasdsa', activeSong)
+  useEffect(
+    function () {
+      async function attachChord () {
+        await chordsAPI.attachChord(activeChordId, activeSong)
+        // setCategoriesArray(
+        //   categories.reduce((cats, item) => {
+        //     const cat = item.category
+        //     return cats.includes(cat) ? cats : [...cats, cat]
+        //   }, [])
+        // )
+      }
 
-  //     attachChord()
-  //   },
-  //   [chordRefresh]
-  // )
+      attachChord()
+    },
+    [attachButton]
+  )
 
   return (
     <div>
@@ -219,6 +223,8 @@ export default function SongCollectionPage ({ user, setUser }) {
             independentChordsArray={independentChordsArray}
             activeChordId={activeChordId}
             setActiveChordId={setActiveChordId}
+            attachButton={attachButton}
+            setAttachButton={setAttachButton}
           />
           <ChordFormSongPanel
             activeSong={activeSong}

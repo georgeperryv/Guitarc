@@ -15,4 +15,6 @@ router.get('/chord-library', chordCtrl.getAllIndependentChords)
 //PUT
 router.put('/change-learned-status/:chordId', chordCtrl.changeLearnedStatus)
 
+router.put('/attach-chord/:activeChordId/:activeSong', chordCtrl.attachChord)
+
 module.exports = router

@@ -15,7 +15,9 @@ export default function SongPanel ({
   ChordRefresh,
   independentChordsArray,
   activeChordId,
-  setActiveChordId
+  setActiveChordId,
+  setAttachButton,
+  attachButton
 }) {
   const [toggled, setToggled] = useState([])
 
@@ -58,6 +60,10 @@ export default function SongPanel ({
       //   setChordRefresh([1])
       setActiveChord(c.chordImage)
     }
+  }
+
+  const handleOnClick = () => {
+    setAttachButton([1])
   }
 
   const chordsList = chordsArray.map(c => (
@@ -120,11 +126,11 @@ export default function SongPanel ({
     <>
       <Dropdown
         options={independentChordsList}
-        placeholder='Select an option'
+        placeholder='Select a Chord to Add'
         onChange={updateCurrentId}
       />
       <ul className='CategoryList'>{chordsList}</ul>
-      <button>Default</button>;
+      <button onClick={handleOnClick}>Default</button>;
     </>
   )
 }
