@@ -178,10 +178,14 @@ export default function ChordDetail ({
         {desiredChord.name}
       </li>
       <li>
-        <span>Learned: </span>
-        {desiredChord.learned.toString()}
+        {/* <span>Learned: </span> */}
+        {desiredChord.learned ? (
+          <span>You know this chord!</span>
+        ) : (
+          <span>Haven't mastered this one yet!</span>
+        )}
       </li>
-      <div>
+      <li>
         {desiredChord.learned ? (
           <label>
             <input
@@ -205,8 +209,8 @@ export default function ChordDetail ({
             Checkbox
           </label>
         )}
-        <p>Is "My Value" checked? {desiredChord.learned}</p>
-      </div>
+        {/* <p>Is "My Value" checked? {desiredChord.learned}</p> */}
+      </li>
       <li>
         <span>Number of Saved Songs With This Chord: </span>
         {desiredChord.song.length}

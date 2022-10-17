@@ -127,8 +127,8 @@ export default function SongPanel ({
         placeholder='Select a Chord to Add'
         onChange={updateCurrentId}
       />
+      <button onClick={handleOnClick}>Attach Chord</button>
       <ul className='CategoryList'>{chordsList}</ul>
-      <button onClick={handleOnClick}>Default</button>;
     </>
   )
 }
