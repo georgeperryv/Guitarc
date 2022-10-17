@@ -26,6 +26,7 @@ export default function ChordLibraryPage (getCategories, chordArray) {
   const [file, setFile] = useState()
   const [description, setDescription] = useState('')
   const [images, setImages] = useState([])
+  const [checked, setChecked] = useState(false)
 
   //chords
 
@@ -70,7 +71,7 @@ export default function ChordLibraryPage (getCategories, chordArray) {
       }
       const myTimeout = setTimeout(getChords2, 1000)
     },
-    [chordRefresh]
+    [chordRefresh, checked]
   )
 
   return (
@@ -79,6 +80,8 @@ export default function ChordLibraryPage (getCategories, chordArray) {
         chordsArray={chordsArray}
         chordRefresh={chordRefresh}
         setChordRefresh={setChordRefresh}
+        setChecked={setChecked}
+        setChordsArray={setChordsArray}
       />
       <div className='ChordLibraryPage'>
         <form onSubmit={submit}>
