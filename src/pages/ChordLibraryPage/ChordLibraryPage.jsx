@@ -32,7 +32,7 @@ export default function ChordLibraryPage (getCategories, chordArray) {
   const [activeChord, setActiveChord] = useState('')
 
   const [chordsArray, setChordsArray] = useState([])
-  const [chordRefresh, setChordRefresh] = useState([])
+  const [chordRefresh, setChordRefresh] = useState(false)
 
   // const [hasLoaded, setHasLoaded] = useState()
 
@@ -79,6 +79,7 @@ export default function ChordLibraryPage (getCategories, chordArray) {
         chordsArray={chordsArray}
         chordRefresh={chordRefresh}
         setChordRefresh={setChordRefresh}
+  
       />
       <div className='ChordLibraryPage'>
         <form onSubmit={submit}>

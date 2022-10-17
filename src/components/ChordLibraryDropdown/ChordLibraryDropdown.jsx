@@ -6,7 +6,11 @@ import 'react-dropdown/style.css'
 import './ChordLibraryDropdown.css'
 import ChordDetail from '../ChordDetail/ChordDetail'
 
-export default function ChordLibraryDropdown ({ chordsArray }) {
+export default function ChordLibraryDropdown ({
+  chordsArray,
+  chordRefresh,
+  setChordRefresh
+}) {
   const [selected, setSelected] = useState('')
 
   const handleChange = event => {
@@ -46,6 +50,8 @@ export default function ChordLibraryDropdown ({ chordsArray }) {
         selected={selected}
         setSelected={setSelected}
         chordsArray={chordsArray}
+        chordRefresh={chordRefresh}
+        setChordRefresh={setChordRefresh}
       />
     </>
   )

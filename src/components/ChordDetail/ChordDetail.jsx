@@ -107,7 +107,9 @@ export default function ChordDetail ({
   selected,
   setSelected,
   chordsArray,
-  setChordsArray
+  setChordsArray,
+  chordRefresh,
+  setChordRefresh
 }) {
   const [checked, setChecked] = useState('1')
   const [learned, setLearned] = useState('')
@@ -116,6 +118,7 @@ export default function ChordDetail ({
   const [newChordsArray, setNewChordsArray] = useState([])
 
   const handleChange = evt => {
+    setChordRefresh(!chordRefresh)
     setChecked(!checked)
     console.log('this is evt', evt)
     setCurrentChordName(evt.target.name)
