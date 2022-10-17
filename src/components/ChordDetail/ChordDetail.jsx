@@ -73,7 +73,7 @@ export default function ChordDetail ({
 
   return selected ? (
     <ListGroup class='ChordDetailPanel'>
-      <ListGroup.Item>
+      <ListGroup.Item class='list-group-item-library'>
         <div id='chordTitle'>{desiredChord.name}</div>
         <div>
           {desiredChord.learned ? (
@@ -107,7 +107,6 @@ export default function ChordDetail ({
                   onChange={handleChange}
                   value={true}
                 />
-                Checkbox
               </label>
             </div>
           )}
@@ -116,7 +115,7 @@ export default function ChordDetail ({
           <span>Number of Saved Songs With This Chord: </span>
           {desiredChord.song.length}
         </div>
-        <img src={`/images/${desiredChord.chordImage}`} />
+        <img id='libraryChordPic' src={`/images/${desiredChord.chordImage}`} />
         {/* </ul> */}
       </ListGroup.Item>
     </ListGroup>

@@ -78,23 +78,38 @@ export default function ChordLibraryPage (getCategories, chordArray) {
     <>
       <h1 class='title'>Song Collection Page</h1>
       <div class='ChordLibraryPage'>
-        <ChordLibraryDropdown
-          chordsArray={chordsArray}
-          chordRefresh={chordRefresh}
-          setChordRefresh={setChordRefresh}
-        />
-        <div id='LibraryPanel1'>
-          <form onSubmit={submit}>
-            <input onChange={fileSelected} type='file' accept='image/*'></input>
-            <input
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-              type='text'
-              required
-            ></input>
-            <button type='submit'>Submit</button>
-          </form>
-        </div>
+        <ListGroup>
+          <ListGroup.Item class='dropdown-and-detail'>
+            <div>
+              <ChordLibraryDropdown
+                chordsArray={chordsArray}
+                chordRefresh={chordRefresh}
+                setChordRefresh={setChordRefresh}
+              />
+            </div>
+          </ListGroup.Item>
+        </ListGroup>
+        <ListGroup>
+          <ListGroup.Item>
+            <div id='librarySubmit'>
+              <form onSubmit={submit}>
+                <input
+                  onChange={fileSelected}
+                  type='file'
+                  accept='image/*'
+                ></input>
+                <input
+                  value={description}
+                  onChange={e => setDescription(e.target.value)}
+                  type='text'
+                  required
+                  placeholder='Type Chord Name'
+                ></input>
+                <button type='submit'>Add Chord</button>
+              </form>
+            </div>
+          </ListGroup.Item>
+        </ListGroup>
       </div>
     </>
   )
