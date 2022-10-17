@@ -101,16 +101,17 @@ async function attachChord (req, res) {
   try {
     // console.log('active songgg', req.params.activeSong)
     const song = await Song.find({ song: req.params.activeSong })
-    // console.log('this is the BEST song', song)
+    console.log('this is the BEST song', song)
+    console.log('this is song_.id', song[0]._id)
     const chord = await Chord.findByIdAndUpdate(req.params.activeChordId, {
-      $set: { song: [song._id] }
+      $push: { song: song[0]._id }
     })
-    // console.log('this is the BEST chord', chord)
+    console.log('this is the BEST chord', chord)
     await chord.save()
-    //     const updatedSong = await Song.findByIdAndUpdate(song._id, {
-    //       $set: { chord: [chord._id] }
-    //     })
-    //     await updatedSong.save()
+    const updatedSong = await Song.findByIdAndUpdate(song[0]._id, {
+      $push: { chord: [chord._id] }
+    })
+    await updatedSong.save()
     res.json('worked')
   } catch {
     console.log('im here')
