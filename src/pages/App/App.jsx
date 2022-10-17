@@ -27,7 +27,7 @@ function App () {
             setChordRefresh={setChordRefresh}
           />
           <Routes>
-            <Route path='/' element={<HomePage />} />
+            <Route path='/*' element={<HomePage />} />
 
             <Route
               path='/chord-library'
@@ -48,6 +48,7 @@ function App () {
               }
             />
             <Route path='/orders' element={<OrderHistoryPage />} />
+            {/* <Routh path="/*" element={Navigate to='/' />}/> */}
           </Routes>
         </>
       ) : (
