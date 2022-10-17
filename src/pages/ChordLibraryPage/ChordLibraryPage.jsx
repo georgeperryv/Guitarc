@@ -4,6 +4,7 @@ import axios from 'axios'
 import SongCollectionPage from '../SongCollectionPage/SongCollectionPage'
 import ChordLibraryDropdown from '../../components/ChordLibraryDropdown/ChordLibraryDropdown'
 import * as chordsAPI from '../../utilities/chords-api'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 import './ChordLibraryPage.css'
 
@@ -75,29 +76,25 @@ export default function ChordLibraryPage (getCategories, chordArray) {
 
   return (
     <>
-      <ChordLibraryDropdown
-        chordsArray={chordsArray}
-        chordRefresh={chordRefresh}
-        setChordRefresh={setChordRefresh}
-      />
-      <div className='ChordLibraryPage'>
-        <form onSubmit={submit}>
-          <input onChange={fileSelected} type='file' accept='image/*'></input>
-          <input
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            type='text'
-            required
-          ></input>
-          <button type='submit'>Submit</button>
-        </form>
-        {/* {images.map(image => (
-          <div key={image}>
-            {' '}
-            <img src={image}></img>
-          </div>
-        ))} */}
-        {/* <img src='/images/dab922f26fdd4f5023284df57e374d61'></img> */}
+      <h1 class='title'>Song Collection Page</h1>
+      <div class='ChordLibraryPage'>
+        <ChordLibraryDropdown
+          chordsArray={chordsArray}
+          chordRefresh={chordRefresh}
+          setChordRefresh={setChordRefresh}
+        />
+        <div id='LibraryPanel1'>
+          <form onSubmit={submit}>
+            <input onChange={fileSelected} type='file' accept='image/*'></input>
+            <input
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              type='text'
+              required
+            ></input>
+            <button type='submit'>Submit</button>
+          </form>
+        </div>
       </div>
     </>
   )

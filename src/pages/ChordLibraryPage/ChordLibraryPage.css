@@ -1,0 +1,32 @@
+.greenChord {
+  color: green;
+  font-style: italic;
+}
+
+.redChord {
+  color: red;
+  font-style: italic;
+}
+
+.checkBox {
+  font-size: 10px;
+  justify-content: center;
+}
+
+.label {
+  justify-content: center;
+}
+
+.list-group {
+  margin: 30px;
+}
+
+#chordTitle {
+  font-size: 16px;
+  text-decoration: underline;
+  padding: 10px;
+}
+.span {
+  color: black;
+  font-size: 12px;
+}

@@ -167,7 +167,7 @@ export default function SongCollectionPage ({ user, setUser }) {
   return (
     <>
       <div class='SongCollectionPage'>
-        <h1>Song Collection Page</h1>
+        <h1 class='title'>Song Collection Page</h1>
         <Accordion defaultActiveKey={['0']} alwaysOpen>
           <Accordion.Item eventKey='0'>
             <Accordion.Header>Categories</Accordion.Header>
@@ -198,77 +198,82 @@ export default function SongCollectionPage ({ user, setUser }) {
               </div>
             </Accordion.Body>
           </Accordion.Item>
-          <Accordion.Item eventKey='1'>
-            <Accordion.Header>Song List</Accordion.Header>
-            <Accordion.Body>
-              <div id='panel2'>
-                {activeCat ? (
-                  <>
-                    <ListGroup>
-                      <ListGroup.Item>
-                        <SongList
-                          songs={songsArray}
-                          activeSong={activeSong}
-                          setActiveSong={setActiveSong}
-                          makeUniqueSongMessage={makeUniqueSongMessage}
-                          setMakeUniqueSongMessage={setMakeUniqueSongMessage}
-                        />
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        <AddSongForm
-                          song={song}
-                          setSong={setSong}
-                          activeCat={activeCat}
-                          setSongRefresh={setSongRefresh}
-                          makeUniqueSongMessage={makeUniqueSongMessage}
-                          setMakeUniqueSongMessage={setMakeUniqueSongMessage}
-                        />
-                      </ListGroup.Item>
-                    </ListGroup>
-                  </>
-                ) : (
-                  <h1></h1>
-                )}
-              </div>
 
-              {/* <Accordion.Item eventKey='2'>
+          {activeCat ? (
+            <Accordion.Item eventKey='1'>
+              <Accordion.Header>Song List</Accordion.Header>
+              <Accordion.Body>
+                <div id='panel2'>
+                  {activeCat ? (
+                    <>
+                      <ListGroup>
+                        <ListGroup.Item>
+                          <SongList
+                            songs={songsArray}
+                            activeSong={activeSong}
+                            setActiveSong={setActiveSong}
+                            makeUniqueSongMessage={makeUniqueSongMessage}
+                            setMakeUniqueSongMessage={setMakeUniqueSongMessage}
+                          />
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          <AddSongForm
+                            song={song}
+                            setSong={setSong}
+                            activeCat={activeCat}
+                            setSongRefresh={setSongRefresh}
+                            makeUniqueSongMessage={makeUniqueSongMessage}
+                            setMakeUniqueSongMessage={setMakeUniqueSongMessage}
+                          />
+                        </ListGroup.Item>
+                      </ListGroup>
+                    </>
+                  ) : (
+                    <h1></h1>
+                  )}
+                </div>
+
+                {/* <Accordion.Item eventKey='2'>
             <Accordion.Header>Song Panel</Accordion.Header>
             <Accordion.Body> */}
-              <div id='panel3'>
-                {activeSong ? (
-                  <>
-                    <ListGroup>
-                      <ListGroup.Item>
-                        <SongPanel
-                          activeSong={activeSong}
-                          chordsArray={chordsArray}
-                          setChordsArray={setChordsArray}
-                          activeChord={activeChord}
-                          setActiveChord={setActiveChord}
-                          independentChordsArray={independentChordsArray}
-                          activeChordId={activeChordId}
-                          setActiveChordId={setActiveChordId}
-                          attachButton={attachButton}
-                          setAttachButton={setAttachButton}
-                        />
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        <ChordFormSongPanel
-                          activeSong={activeSong}
-                          chordRefresh={chordRefresh}
-                          setChordRefresh={setChordRefresh}
-                        />
-                      </ListGroup.Item>
-                    </ListGroup>
-                  </>
-                ) : (
-                  <h1></h1>
-                )}
-              </div>
-              {/* </Accordion.Body>
+                <div id='panel3'>
+                  {activeSong ? (
+                    <>
+                      <ListGroup>
+                        <ListGroup.Item>
+                          <SongPanel
+                            activeSong={activeSong}
+                            chordsArray={chordsArray}
+                            setChordsArray={setChordsArray}
+                            activeChord={activeChord}
+                            setActiveChord={setActiveChord}
+                            independentChordsArray={independentChordsArray}
+                            activeChordId={activeChordId}
+                            setActiveChordId={setActiveChordId}
+                            attachButton={attachButton}
+                            setAttachButton={setAttachButton}
+                          />
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          <ChordFormSongPanel
+                            activeSong={activeSong}
+                            chordRefresh={chordRefresh}
+                            setChordRefresh={setChordRefresh}
+                          />
+                        </ListGroup.Item>
+                      </ListGroup>
+                    </>
+                  ) : (
+                    <h1></h1>
+                  )}
+                </div>
+                {/* </Accordion.Body>
           </Accordion.Item> */}
-            </Accordion.Body>
-          </Accordion.Item>
+              </Accordion.Body>
+            </Accordion.Item>
+          ) : (
+            ''
+          )}
         </Accordion>
       </div>
     </>
