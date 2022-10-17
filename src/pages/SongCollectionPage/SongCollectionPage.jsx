@@ -153,6 +153,7 @@ export default function SongCollectionPage ({ user, setUser }) {
     function () {
       async function attachChord () {
         await chordsAPI.attachChord(activeChordId, activeSong)
+        setChordRefresh([1])
         // setCategoriesArray(
         //   categories.reduce((cats, item) => {
         //     const cat = item.category
@@ -218,8 +219,6 @@ export default function SongCollectionPage ({ user, setUser }) {
             setChordsArray={setChordsArray}
             activeChord={activeChord}
             setActiveChord={setActiveChord}
-            chordRefresh={chordRefresh}
-            setChordRefresh={setChordRefresh}
             independentChordsArray={independentChordsArray}
             activeChordId={activeChordId}
             setActiveChordId={setActiveChordId}

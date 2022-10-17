@@ -11,8 +11,6 @@ export default function SongPanel ({
   setChordsArray,
   activeChord,
   setActiveChord,
-  setChordRefresh,
-  ChordRefresh,
   independentChordsArray,
   activeChordId,
   setActiveChordId,

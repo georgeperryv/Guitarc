@@ -34,7 +34,7 @@ export default function ChordFormSongPanel ({
     event.preventDefault()
 
     const result = await postImage({ image: file, description, activeSong })
-    const myTimeout = setTimeout(setChordRefresh([1]), 5000)
+    const myTimeout = setTimeout(setChordRefresh([1]), 1000)
     setDescription('')
     console.log('result', result)
     setImages([result.imagePath, ...images])
