@@ -76,7 +76,7 @@ export default function ChordLibraryPage (getCategories, chordArray) {
 
   return (
     <>
-      <h1 class='title'>Song Collection Page</h1>
+      <h1 class='title'>Chord Library Page</h1>
       <div class='ChordLibraryPage'>
         <ListGroup>
           <ListGroup.Item class='dropdown-and-detail'>
@@ -90,13 +90,14 @@ export default function ChordLibraryPage (getCategories, chordArray) {
           </ListGroup.Item>
         </ListGroup>
         <ListGroup>
-          <ListGroup.Item>
-            <div id='librarySubmit'>
+          <div id='librarySubmit'>
+            <ListGroup.Item>
               <form onSubmit={submit}>
                 <input
                   onChange={fileSelected}
                   type='file'
                   accept='image/*'
+                  required
                 ></input>
                 <input
                   value={description}
@@ -107,8 +108,8 @@ export default function ChordLibraryPage (getCategories, chordArray) {
                 ></input>
                 <button type='submit'>Add Chord</button>
               </form>
-            </div>
-          </ListGroup.Item>
+            </ListGroup.Item>
+          </div>
         </ListGroup>
       </div>
     </>

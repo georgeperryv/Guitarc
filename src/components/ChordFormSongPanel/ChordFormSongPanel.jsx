@@ -63,8 +63,9 @@ export default function ChordFormSongPanel ({
           onChange={e => setDescription(e.target.value)}
           type='text'
           required
+          placeholder='Type Chord Here'
         ></input>
-        <button type='submit'>Submit</button>
+        <button type='submit'>Add Chord</button>
       </form>
     </div>
   )

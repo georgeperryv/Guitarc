@@ -7,6 +7,7 @@ import SongCollectionPage from '../SongCollectionPage/SongCollectionPage'
 import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage'
 import { Routes, Route } from 'react-router-dom'
 import NavBar from '../../components/NavBar/NavBar'
+import HomePage from '../HomePage/HomePage'
 import { getUser } from '../../utilities/users-service'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -26,6 +27,8 @@ function App () {
             setChordRefresh={setChordRefresh}
           />
           <Routes>
+            <Route path='/' element={<HomePage />} />
+
             <Route
               path='/chord-library'
               element={
