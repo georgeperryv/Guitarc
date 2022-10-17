@@ -9,12 +9,7 @@ import AddSongForm from '../../components/AddSongForm/AddSongForm'
 import SongPanel from '../../components/SongPanel/SongPanel'
 import ChordFormSongPanel from '../../components/ChordFormSongPanel/ChordFormSongPanel'
 
-export default function SongCollectionPage ({
-  user,
-  setUser,
-  chordRefresh,
-  setChordRefresh
-}) {
+export default function SongCollectionPage ({ user, setUser }) {
   //Category name of whatever is currently clicked. This is passed down to the category list
   const [activeCat, setActiveCat] = useState('')
 
@@ -51,6 +46,8 @@ export default function SongCollectionPage ({
 
   //chords
 
+  const [chordRefresh, setChordRefresh] = useState([])
+
   const [activeChord, setActiveChord] = useState('')
 
   const [chordsArray, setChordsArray] = useState([])
@@ -62,6 +59,9 @@ export default function SongCollectionPage ({
   // const [chordRefresh, setChordRefresh] = useState([])
 
   //useEffect for getting Categories into an array called Categories Array and updating based on categoriesRefresh
+
+  console.log('inside songcolletionpage activeSong', activeSong)
+
   useEffect(
     function () {
       async function getCategories () {
@@ -137,6 +137,30 @@ export default function SongCollectionPage ({
     },
     [activeCat, activeSong, chordRefresh, activeChord]
   )
+
+  //To add a chord to a song array if submitted
+
+  // const handleAttachButton = event => {
+  //   console.log('handle change', event.value.props)
+  //   setSelected(event.value.props.children[0])
+  // }
+
+  // useEffect(
+  //   function () {
+  //     async function attachChord () {
+  //       // const attach = await chordsAPI.attachChord(activeChordId)
+  //       // setCategoriesArray(
+  //       //   categories.reduce((cats, item) => {
+  //       //     const cat = item.category
+  //       //     return cats.includes(cat) ? cats : [...cats, cat]
+  //       //   }, [])
+  //       // )
+  //     }
+
+  //     attachChord()
+  //   },
+  //   [chordRefresh]
+  // )
 
   return (
     <div>

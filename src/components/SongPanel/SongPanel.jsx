@@ -38,6 +38,7 @@ export default function SongPanel ({
   //   }
 
   console.log('this is the NEWEST activeChordId', activeChordId)
+  //   console.log('this is the NSDFDSFFSDFF active song', activeSong)
 
   const updateCurrentId = evt => {
     console.log(evt)
@@ -67,7 +68,7 @@ export default function SongPanel ({
       onClick={() => {
         // setChordRefresh([1])
         console.log('this is c', c)
-        setActiveChordId(c._id)
+        // setActiveChordId(c._id)
         setActiveChord([1])
         addOrRemoveImage(c)
       }}
