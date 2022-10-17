@@ -1,4 +1,4 @@
-.SongCollectionPage {
+/* .SongCollectionPage {
   height: 100%;
   display: grid;
   grid-template-columns: 1.6fr 3.5fr 3fr;
@@ -13,4 +13,8 @@
   justify-content: space-between;
   align-items: center;
   margin: 3vmin 2vmin;
+} */
+
+.SongCollectionPage {
+  display: grid;
 }

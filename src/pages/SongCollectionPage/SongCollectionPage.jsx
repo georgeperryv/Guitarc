@@ -8,6 +8,8 @@ import SongList from '../../components/SongList/SongList'
 import AddSongForm from '../../components/AddSongForm/AddSongForm'
 import SongPanel from '../../components/SongPanel/SongPanel'
 import ChordFormSongPanel from '../../components/ChordFormSongPanel/ChordFormSongPanel'
+import ListGroup from 'react-bootstrap/ListGroup'
+import './SongCollectionPage.css'
 
 export default function SongCollectionPage ({ user, setUser }) {
   //Category name of whatever is currently clicked. This is passed down to the category list
@@ -154,12 +156,6 @@ export default function SongCollectionPage ({ user, setUser }) {
       async function attachChord () {
         await chordsAPI.attachChord(activeChordId, activeSong)
         setChordRefresh([1])
-        // setCategoriesArray(
-        //   categories.reduce((cats, item) => {
-        //     const cat = item.category
-        //     return cats.includes(cat) ? cats : [...cats, cat]
-        //   }, [])
-        // )
       }
 
       attachChord()
@@ -168,72 +164,94 @@ export default function SongCollectionPage ({ user, setUser }) {
   )
 
   return (
-    <div>
-      <aside className='SongCollectionPage'>
-        <h1>Song Collection Page</h1>
-        <CategoryList
-          categories={categoriesArray}
-          activeCat={activeCat}
-          setActiveCat={setActiveCat}
-          makeUniqueCatMessage={makeUniqueCatMessage}
-          setMakeUniqueCatMessage={setMakeUniqueCatMessage}
-          setMakeUniqueSongMessage={setMakeUniqueSongMessage}
-          setActiveSong={setActiveSong}
-        />
-        <AddCategoryForm
-          category={category}
-          setCategory={setCategory}
-          setCategoriesRefresh={setCategoriesRefresh}
-          makeUniqueCatMessage={makeUniqueCatMessage}
-          setMakeUniqueCatMessage={setMakeUniqueCatMessage}
-        />
-      </aside>
-      <div>
-        {activeCat ? (
-          <>
-            <SongList
-              songs={songsArray}
-              activeSong={activeSong}
-              setActiveSong={setActiveSong}
-              makeUniqueSongMessage={makeUniqueSongMessage}
-              setMakeUniqueSongMessage={setMakeUniqueSongMessage}
-            />
-            <AddSongForm
-              song={song}
-              setSong={setSong}
-              activeCat={activeCat}
-              setSongRefresh={setSongRefresh}
-              makeUniqueSongMessage={makeUniqueSongMessage}
-              setMakeUniqueSongMessage={setMakeUniqueSongMessage}
-            />
-          </>
-        ) : (
-          <h1></h1>
-        )}
+    <>
+      <div class='SongCollectionPage'>
+        <div id='Panel1'>
+          <h1>Song Collection Page</h1>
+          <ListGroup>
+            <ListGroup.Item>
+              <CategoryList
+                categories={categoriesArray}
+                activeCat={activeCat}
+                setActiveCat={setActiveCat}
+                makeUniqueCatMessage={makeUniqueCatMessage}
+                setMakeUniqueCatMessage={setMakeUniqueCatMessage}
+                setMakeUniqueSongMessage={setMakeUniqueSongMessage}
+                setActiveSong={setActiveSong}
+              />
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <AddCategoryForm
+                category={category}
+                setCategory={setCategory}
+                setCategoriesRefresh={setCategoriesRefresh}
+                makeUniqueCatMessage={makeUniqueCatMessage}
+                setMakeUniqueCatMessage={setMakeUniqueCatMessage}
+              />
+            </ListGroup.Item>
+          </ListGroup>
+        </div>
+        <div id='panel2'>
+          {activeCat ? (
+            <>
+              <ListGroup>
+                <ListGroup.Item>
+                  <SongList
+                    songs={songsArray}
+                    activeSong={activeSong}
+                    setActiveSong={setActiveSong}
+                    makeUniqueSongMessage={makeUniqueSongMessage}
+                    setMakeUniqueSongMessage={setMakeUniqueSongMessage}
+                  />
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <AddSongForm
+                    song={song}
+                    setSong={setSong}
+                    activeCat={activeCat}
+                    setSongRefresh={setSongRefresh}
+                    makeUniqueSongMessage={makeUniqueSongMessage}
+                    setMakeUniqueSongMessage={setMakeUniqueSongMessage}
+                  />
+                </ListGroup.Item>
+              </ListGroup>
+            </>
+          ) : (
+            <h1></h1>
+          )}
+        </div>
+        <div id='panel3'>
+          {activeSong ? (
+            <>
+              <ListGroup>
+                <ListGroup.Item>
+                  <SongPanel
+                    activeSong={activeSong}
+                    chordsArray={chordsArray}
+                    setChordsArray={setChordsArray}
+                    activeChord={activeChord}
+                    setActiveChord={setActiveChord}
+                    independentChordsArray={independentChordsArray}
+                    activeChordId={activeChordId}
+                    setActiveChordId={setActiveChordId}
+                    attachButton={attachButton}
+                    setAttachButton={setAttachButton}
+                  />
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <ChordFormSongPanel
+                    activeSong={activeSong}
+                    chordRefresh={chordRefresh}
+                    setChordRefresh={setChordRefresh}
+                  />
+                </ListGroup.Item>
+              </ListGroup>
+            </>
+          ) : (
+            <h1></h1>
+          )}
+        </div>
       </div>
-      {activeSong ? (
-        <>
-          <SongPanel
-            activeSong={activeSong}
-            chordsArray={chordsArray}
-            setChordsArray={setChordsArray}
-            activeChord={activeChord}
-            setActiveChord={setActiveChord}
-            independentChordsArray={independentChordsArray}
-            activeChordId={activeChordId}
-            setActiveChordId={setActiveChordId}
-            attachButton={attachButton}
-            setAttachButton={setAttachButton}
-          />
-          <ChordFormSongPanel
-            activeSong={activeSong}
-            chordRefresh={chordRefresh}
-            setChordRefresh={setChordRefresh}
-          />
-        </>
-      ) : (
-        <h1></h1>
-      )}
-    </div>
+    </>
   )
 }

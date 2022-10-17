@@ -8,6 +8,7 @@ import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage'
 import { Routes, Route } from 'react-router-dom'
 import NavBar from '../../components/NavBar/NavBar'
 import { getUser } from '../../utilities/users-service'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App () {
   // set the user by calling getUser function
