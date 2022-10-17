@@ -43,32 +43,32 @@ export default function ChordLibraryPage (getCategories, chordArray) {
     const result = await postImage({ image: file, description })
     setChordRefresh([1])
     setDescription('')
-    console.log('result', result)
+    // console.log('result', result)
     setImages([result.imagePath, ...images])
-    console.log('images array', images)
+    // console.log('images array', images)
   }
 
-  console.log('images array 2', images)
+  // console.log('images array 2', images)
   const fileSelected = event => {
     const file = event.target.files[0]
     setFile(file)
   }
-  // setChordRefresh([1])
 
   useEffect(
     function () {
       async function getChords2 () {
         const chords = await chordsAPI.getAllIndependentChords()
-        console.log('were back with chords', chords)
+        // console.log('were back with chords', chords)
         setChordsArray(
           chords.reduce((c, item) => {
             const chord = item
             return c.includes(chord) ? c : [...c, chord]
           }, [])
         )
-        console.log('this is the NEWW chordsArray', chordsArray)
+        // console.log('this is the NEWW chordsArray', chordsArray)
       }
-      const myTimeout = setTimeout(getChords2, 1000)
+      // const myTimeout = setTimeout(getChords2, 1000)
+      getChords2()
     },
     [chordRefresh]
   )
@@ -79,7 +79,6 @@ export default function ChordLibraryPage (getCategories, chordArray) {
         chordsArray={chordsArray}
         chordRefresh={chordRefresh}
         setChordRefresh={setChordRefresh}
-  
       />
       <div className='ChordLibraryPage'>
         <form onSubmit={submit}>

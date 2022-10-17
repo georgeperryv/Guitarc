@@ -12,37 +12,50 @@ export default function ChordLibraryDropdown ({
   setChordRefresh
 }) {
   const [selected, setSelected] = useState('')
+  const [isLearned, setIsLearned] = useState(false)
 
   const handleChange = event => {
     console.log('handle change', event.value.props)
-    setSelected(event.value.props.children[0])
+    setSelected(event.value.props.children)
   }
 
-  console.log('chords array getting passed in', chordsArray)
-  const chordList = chordsArray.map(c =>
-    c.learned ? (
-      <div className='ChordLibraryDropDown' id='greenLabel' key={c.chordName}>
-        {c.name}
-        {console.log(c.learned)}
-      </div>
-    ) : (
-      <div
-        className='ChordLibraryDropDown'
-        id='redLabel'
-        key={c.chord}
-        onClick={() => {}}
-      >
-        {c.name}
-        {console.log(c.learned)}
-      </div>
-    )
-  )
+  console.log('ChordLibraryDropdown - chordsArray', chordsArray)
+  console.log('selected', selected)
+
+  useEffect(() => {
+    var index = null
+    for (let i = 0; i < chordsArray.length; i++) {
+      if (chordsArray[i].name === selected) {
+        index = i
+      }
+    }
+    index && setIsLearned(chordsArray[index].learned)
+  }, [selected])
 
   return (
     <>
       <Dropdown
-        // value={selected}
-        options={chordList}
+        value={
+          // <div
+          //   className='ChordLibraryDropDown'
+          //   label={<div>HELLO</div>}
+          //   value='hello'
+          //   id={isLearned ? 'greenLabel' : 'redLabel'}
+          // >
+          //   Hello
+          // </div>
+          selected
+        }
+        placeholderClassName='ChordLibraryDropDownP'
+        options={chordsArray.map(c => (
+          <div
+            className='ChordLibraryDropDown'
+            id={c.learned ? 'greenLabel' : 'redLabel'}
+            key={c.chordName}
+          >
+            {c.name}
+          </div>
+        ))}
         onChange={handleChange}
         placeholder='Select a Chord'
       />

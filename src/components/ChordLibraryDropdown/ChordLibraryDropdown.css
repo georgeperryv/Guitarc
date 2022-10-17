@@ -5,3 +5,8 @@
 #redLabel {
   color: red;
 }
+
+.ChordLibraryDropDownP,
+dropDownPlaceholder {
+  color: black;
+}
