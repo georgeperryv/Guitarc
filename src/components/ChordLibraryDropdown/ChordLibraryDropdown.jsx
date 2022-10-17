@@ -40,7 +40,7 @@ export default function ChordLibraryDropdown ({ chordsArray }) {
         // value={selected}
         options={chordList}
         onChange={handleChange}
-        placeholder='Select an option'
+        placeholder='Select a Chord'
       />
       <ChordDetail
         selected={selected}

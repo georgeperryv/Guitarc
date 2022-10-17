@@ -76,45 +76,21 @@ async function changeLearnedStatus (req, res) {
   console.log('inside changedLearnedStatus4')
   try {
     var totalChordArray = []
-    console.log('chordId asdfadsf', req.params.chordId)
+
     const chord = await Chord.findById(req.params.chordId)
     if (chord.learned) {
-      console.log('inside chord.learned true')
-      const currentChord = await Chord.findOneAndUpdate(
-        { _id: req.params.chordId },
-        update,
-        { learned: false }
-      )
+      const currentChord = await Chord.findByIdAndUpdate(req.params.chordId, {
+        $set: { learned: false }
+      })
       await currentChord.save()
-      res.json('complete')
+      res.json('false')
     } else {
-      console.log('inside chord.learned false')
       const currentChord2 = await Chord.findByIdAndUpdate(req.params.chordId, {
         $set: { learned: true }
       })
-      console.log('currentChord2', currentChord2)
       await currentChord2.save()
-      console.log('this is currentChord2', currentChord2)
-      res.json('complete')
+      res.json('true')
     }
-
-    // console.log('this is currentChord65', currentChord)
-    //   const chordToChange = await Chord.findOneAndUpdate(
-    //     req.params.chordId,
-    //     update,
-    //     { learned: false }
-    //   )
-    //   const allChords = await Chord.find({ user: req.user._id })
-    //   res.json(allChords)
-    // } else {
-    //   const chordToChange2 = await Chord.findOneAndUpdate(
-    //     req.params.chordId,
-    //     update,
-    //     { learned: true }
-    //   )
-    //   const allChords = await Chord.find({ user: req.user._id })
-    //   res.json(allChords)
-    // }
   } catch {
     res.json('Didnt work')
   }
