@@ -55,6 +55,10 @@ export default function SongCollectionPage ({
 
   const [chordsArray, setChordsArray] = useState([])
 
+  const [independentChordsArray, setIndependentChordsArray] = useState([])
+
+  const [activeChordId, setActiveChordId] = useState('')
+
   // const [chordRefresh, setChordRefresh] = useState([])
 
   //useEffect for getting Categories into an array called Categories Array and updating based on categoriesRefresh
@@ -113,6 +117,27 @@ export default function SongCollectionPage ({
     [activeCat, activeSong, chordRefresh, activeChord]
   )
 
+  useEffect(
+    function () {
+      async function getIndependentChords () {
+        const chords2 = await chordsAPI.getAllIndependentChords()
+        console.log('were back with chords33', chords2)
+        setIndependentChordsArray(
+          chords2.reduce((c, item) => {
+            const chord = item
+            return c.includes(chord) ? c : [...c, chord]
+          }, [])
+        )
+        console.log(
+          'this is the NEWW independentchordsArray',
+          independentChordsArray
+        )
+      }
+      const myTimeout = setTimeout(getIndependentChords, 1000)
+    },
+    [activeCat, activeSong, chordRefresh, activeChord]
+  )
+
   return (
     <div>
       <aside className='SongCollectionPage'>
@@ -167,6 +192,9 @@ export default function SongCollectionPage ({
             setActiveChord={setActiveChord}
             chordRefresh={chordRefresh}
             setChordRefresh={setChordRefresh}
+            independentChordsArray={independentChordsArray}
+            activeChordId={activeChordId}
+            setActiveChordId={setActiveChordId}
           />
           <ChordFormSongPanel
             activeSong={activeSong}

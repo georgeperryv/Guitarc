@@ -12,11 +12,16 @@ export default function SongPanel ({
   activeChord,
   setActiveChord,
   setChordRefresh,
-  ChordRefresh
+  ChordRefresh,
+  independentChordsArray,
+  activeChordId,
+  setActiveChordId
 }) {
   const [toggled, setToggled] = useState([])
 
   const [imageArray, setImageArray] = useState([])
+
+  const [arrayOfSongIds, setArrayOfSongIds] = useState([])
 
   const temp = useRef([])
 
@@ -32,6 +37,14 @@ export default function SongPanel ({
   //     setActiveChord(c.chordImage)
   //   }
 
+  console.log('this is the NEWEST activeChordId', activeChordId)
+
+  const updateCurrentId = evt => {
+    console.log(evt)
+    setActiveChordId(evt.value.props.id)
+    console.log('this is the NEWEST2 activeChord', activeChordId)
+  }
+
   const addOrRemoveImage = c => {
     if (temp.current.includes(c.chordImage)) {
       const index = temp.current.indexOf(c.chordImage)
@@ -46,24 +59,16 @@ export default function SongPanel ({
     }
   }
 
-  //   const checkImageDisplay = c => {
-  //     if (temp.current.includes(c.chordImage)) {
-  //       console.log('inside the if temp.current', temp.current)
-  //       return false
-  //     } else {
-  //       console.log('inside the else temp.current', temp.current)
-  //       return true
-  //     }
-  //   }
-
-  const chordList = chordsArray.map(c => (
+  const chordsList = chordsArray.map(c => (
     <li
-      id={c.chordName}
+      id={c._id}
       key={c.chordName}
       className={c === activeChord ? 'active' : ''}
       onClick={() => {
         // setChordRefresh([1])
-        setActiveChord(c)
+        console.log('this is c', c)
+        setActiveChordId(c._id)
+        setActiveChord([1])
         addOrRemoveImage(c)
       }}
     >
@@ -79,11 +84,46 @@ export default function SongPanel ({
     </li>
   ))
 
+  //   for (x =0; x < chordsArray.length, x++){
+  //     console.log('hello')
+  //   }
+
+  console.log('this is chordsList', chordsList)
+
+  const independentChordsList = independentChordsArray.map(a => (
+    <li
+      id={a._id}
+      key={a.name}
+      className={a === activeChord ? 'active' : ''}
+      onClick={() => {
+        // setActiveChord(a)
+        // addOrRemoveImage(a)
+      }}
+    >
+      {a.name}
+      {/* <div>
+        {console.log('this is temp.current', temp.current)}
+        {temp.current.includes(a.chordImage) ? (
+          <img src={`/images/${a.chordImage}`} />
+        ) : (
+          ''
+        )}
+      </div> */}
+    </li>
+  ))
+
+  //   console.log('ACTIVE CHORD', activeChord)
+
   const options = ['one', 'two', 'three']
   return (
     <>
-      <Dropdown options={options} value={5} placeholder='Select an option' />
-      <ul className='CategoryList'>{chordList}</ul>
+      <Dropdown
+        options={independentChordsList}
+        placeholder='Select an option'
+        onChange={updateCurrentId}
+      />
+      <ul className='CategoryList'>{chordsList}</ul>
+      <button>Default</button>;
     </>
   )
 }
