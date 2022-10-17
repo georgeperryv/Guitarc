@@ -111,42 +111,47 @@ export default function ChordDetail ({
   chordRefresh,
   setChordRefresh
 }) {
-  const [checked, setChecked] = useState('1')
-  const [learned, setLearned] = useState('')
-  const [currentChordName, setCurrentChordName] = useState('')
-  const [newChordRefresh, setNewChordRefresh] = useState([])
-  const [newChordsArray, setNewChordsArray] = useState([])
+  const desiredChord = chordsArray[index]
 
-  const handleChange = evt => {
+  const [checked, setChecked] = useState(desiredChord.learned)
+  // const [learned, setLearned] = useState('')
+  const [currentChordName, setCurrentChordName] = useState('')
+  // const [newChordRefresh, setNewChordRefresh] = useState([])
+  // const [newChordsArray, setNewChordsArray] = useState([])
+
+  const handleChange = async evt => {
     setChordRefresh(!chordRefresh)
     setChecked(!checked)
     console.log('this is evt', evt)
     setCurrentChordName(evt.target.name)
     console.log('the current chord name', currentChordName)
-    if (checked === false) {
-      setLearned('Learned')
-    } else {
-      setLearned('Not Learned')
-    }
+    await changeLearnedStatus()
+    // if (checked === false) {
+    //   setLearned('Learned')
+    // } else {
+    //   setLearned('Not Learned')
+    // }
   }
 
-  useEffect(
-    function () {
-      async function changeLearnedStatus () {
-        console.log('the current chord name2', currentChordName)
-        const chords = await chordsAPI.changeLearnedStatus(currentChordName)
-        setNewChordRefresh([1])
-        setNewChordsArray(
-          chords.reduce((c, item) => {
-            const chord = item
-            return c.includes(chord) ? c : [...c, chord]
-          }, [])
-        )
-      }
-      const myTimeout = setTimeout(changeLearnedStatus, 1000)
-    },
-    [checked]
-  )
+  async function changeLearnedStatus () {
+    console.log('the current chord name2', currentChordName)
+    const chords = await chordsAPI.changeLearnedStatus(currentChordName)
+    // setNewChordRefresh([1])
+    console.log('chords', chords)
+    // setNewChordsArray(
+    //   chords.reduce((c, item) => {
+    //     const chord = item
+    //     return c.includes(chord) ? c : [...c, chord]
+    //   }, [])
+    // )
+  }
+
+  // useEffect(
+  //   function () {
+  //     const myTimeout = setTimeout(changeLearnedStatus, 1000)
+  //   },
+  //   [checked]
+  // )
 
   console.log('inside chordr detail chords array', chordsArray)
   console.log('inside chords detail selected', selected)
@@ -158,7 +163,6 @@ export default function ChordDetail ({
   }
   //   const index = chordsArray.indexOf(selected)
   console.log('this is index', index)
-  const desiredChord = chordsArray[index]
   console.log(desiredChord)
 
   return selected ? (
@@ -169,33 +173,20 @@ export default function ChordDetail ({
       </li>
       <li>
         <span>Learned: </span>
-        {desiredChord.learned.toString()}
+        {checked}
       </li>
       <div>
-        {desiredChord.learned ? (
-          <label>
-            <input
-              type='checkbox'
-              name={desiredChord._id}
-              checked={true}
-              onChange={handleChange}
-              value={true}
-            />
-            Checkbox
-          </label>
-        ) : (
-          <label>
-            <input
-              type='checkbox'
-              name={desiredChord._id}
-              checked={false}
-              onChange={handleChange}
-              value={true}
-            />
-            Checkbox
-          </label>
-        )}
-        <p>Is "My Value" checked? {learned}</p>
+        <label>
+          <input
+            type='checkbox'
+            name={desiredChord._id}
+            checked={checked}
+            onChange={handleChange}
+            value={true}
+          />
+          Checkbox
+        </label>
+        <p>Is "My Value" checked? {checked}</p>
       </div>
       <li>
         <span>Number of Saved Songs With This Chord: </span>
