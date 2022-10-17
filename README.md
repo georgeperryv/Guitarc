@@ -1,9 +1,5 @@
 # Guitarc
 
-This is our third project at General Assembly.
-
-## Description
-
 Guitarc is designed to help guitarists organize their musical journey.
 This app allows a user to save and update chords as they are learned
 by attaching finger positioning images to the "Chord Library" page.
@@ -16,96 +12,64 @@ Chorld Library.
 
 ![User Stories](https://imgur.com/2BEKRQW.jpg)
 
-## Log in
+## Entity Relationship Diagram
 
-![Sign In](https://i.imgur.com/djBj8p7.png)
+![Entity Relationship Diagram](https://imgur.com/38dNzbN.jpg)
 
-## Sign up
+## Sign Up
 
-![Sign Up](https://i.imgur.com/yQ0Wr0O.png)
+![Sign Up](https://imgur.com/bN3UXKZ.jpg)
 
-## Job listings
+## Home Page
 
-![Job listing](https://i.imgur.com/nNgB5w3.png)
+![Home Page](https://imgur.com/bWJiQ73.jpg)
 
-## Job matches
+## Chord Library
 
-![Job matches](https://i.imgur.com/NtW0Z8u.png)
+![Chord Library](https://imgur.com/ddVxjh6.jpg)
 
-## Profile
+## Chord Library - Dropdown Displaying Learned(Green) and Unlearned(Red) Chords
 
-![Profile](https://i.imgur.com/T7PHycP.png)
+![Dropdown](https://imgur.com/pny6brt.jpg)
 
-## Saved Jobs
+## Song Collection
 
-![Saved Jobs](https://i.imgur.com/QL1eaql.png)
+![Song Collection](https://imgur.com/XDyVHdj.jpg)
 
-## API
+## Song Panel - Displayed After Clicking a Song Under Song Collection
 
-![The API we used](https://i.imgur.com/Y3gjKwQ.png)
+![Song Panel](https://imgur.com/rZaLKXK.jpg)
 
 ## Technologies used
 
-- Django
-- Python
+- React
+- AWS S3
+- JavaScript
+- Express
+- Node.js
+- Mongoose
+- MongoDb
+- React Bootstrap
 - CSS
-- HTML
-- PostgreSQL
 - Trello
 - VScode
 - Heroku
 - Whimsical
-- Adzuna API
-- Amazon web service
-- pgAdmin
 
-## [Adzuna API](https://developer.adzuna.com/)
+## [Getting started ](https://guitarc.herokuapp.com/)
 
-We used the Adzuna API to pull job listings from the Adzuna website. Adzuna is a job forum website similar to indeed, or glassdoor. The API returns the information for job postings that can then be filtered to fetch very content that adheres to whatever criteria are of interest. We take in this information and use it to create our own job postings, which we can then match against the user's skillset.
-<br> [Documentation for API](https://developer.adzuna.com/overview)
-
-## [Getting started ](https://perfectmatchskills.herokuapp.com/job-listings/)
-
-Log into the website with the log in link and then you are free to do whatever you want in the website, browse job listings, add skills, remove skills, add jobs to youre saved jobs, ANYTHING!
+Create an account and begin organizing your journey as a musician!
 
 ## Original Wireframe and Planning
 
-- [Trello](https://trello.com/b/YbLVf3RD/project-3#)
-- [Whimsical](https://whimsical.com/project-3-5rQgxTeWbUqZtKvYZG7ZoC)
-
-## Wins
-
-A major win for this project was being able to implement full CRUD (Create Read Update Delete). Our site features at least one each CRUD operation.
-<br>
-<br> Another win during this project was being able to work together as a team to impliment an agile workflow that pooled everyone's resources into solving problems.
-
-## Hurdles
-
-There were countless hurdles with the project. Almost every function we wrote, that went beyond basics, lead to a multitude of errors that usually resulted in refactoring almost all of our codebase. However, we were able to get all of the functions working and learned a lot in the process, even if at first they appeared seemingly impossible.
-
-<br><br>
-A particularly noteworthy hurdle was when we had to change ourjob listings from being stored in a list to actually saving them as objects in the database. It resulted in unexpected errors when stored in an array, because we didn't have any persistent data. Refacorting the function to store the data in a SQL database and then accessing that data through object queries greatly improved the performance and readability of our code.
+- [Whimsical](https://whimsical.com/project-4-guitarc-3RGZ6kPdeNvtMLe5FM9LjV)
 
 ## Next Steps
 
-We have a slew of icebox features, including:
+There are so many cool features I can continue to add with this project, including:
 
-- Moving Api into an independent folder, so we don't have to rely on it being in views, and therefor have to import views in each instance we want to use it.
-- Adding the ability to remove jobs from saved.
-- Deleting jobs after a certain amount of time and replacing them with newer ones.
-- Updating our API alogirthm so that the API is judiciously pinged, rather than having it ping every time a user accesses one of the URL endpoints that depend upon it.
-
-## Credits
-
-- Patrick Schenk
-- George Perry
-- Payne Fulcher
-- James Fox
-- Ogan Aktolun
-
-Instructional Team at GA,
-
-- Suresh Sigera
-- Nellie Bosch
-- Rondell Charles
-- Kenneth Chang
+- Add an ability to organize chords belonging to a song in chronological order
+- Display the names of the songs attached to each chord on the Chord Library Page
+- Indicate whether or not a chord is "learned" in the Song Panel Section
+- Implement test cases to ensure code is functioning properly
+- Properly size images uploaded by a user for continuity and to prevent potential complexities with the server
